@@ -1,4 +1,14 @@
-$primary: #008080;
+$midnight-green: #004e64;
+$pacific-cyan: #00a5cf;
+$aquamarine: #9fffcb;
+$persian-green: #25a18e;
+$light-green: #7ae582;
+
+$primary: $midnight-green;
+$secondary: $light-green;
+
+$offcanvas-horizontal-width: 60%;
+$offcanvas-padding-x: 2rem;
 
 // Import all of Bootstrap's CSS
 @import "~bootstrap/scss/bootstrap";
