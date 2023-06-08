@@ -50,7 +50,7 @@ const Login = () => {
             <FaGoogle />
             &nbsp;Login with Google
           </button>
-          <div className="text-center">
+          <div className="text-center py-1">
             <p>
               Don't have an account?
               <Link to="/register" className="text-decoration-none">
