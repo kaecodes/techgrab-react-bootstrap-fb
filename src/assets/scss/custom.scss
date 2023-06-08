@@ -3,13 +3,16 @@ $pacific-cyan: #00a5cf;
 $aquamarine: #9fffcb;
 $persian-green: #25a18e;
 $light-green: #7ae582;
+$accent-orange: #ff6f00;
 
 $primary: $midnight-green;
 $secondary: $light-green;
+$warning: $accent-orange;
 
 $offcanvas-horizontal-width: 60%;
 $offcanvas-padding-x: 2rem;
 
 $enable-shadows: true;
+
 // Import all of Bootstrap's CSS
 @import "~bootstrap/scss/bootstrap";
