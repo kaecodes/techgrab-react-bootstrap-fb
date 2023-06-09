@@ -175,12 +175,6 @@ const Header = () => {
                 </li>
                 <li className="nav-item d-none d-lg-flex justify-content-end">
                   {cart}
-                  {/* <Link to="/cart" className="nav-link text-light pe-0 me-lg-4">
-                    <FaShoppingCart className="d-inline" />
-                    <p className="d-inline">
-                      <sup>10</sup>
-                    </p>
-                  </Link> */}
                 </li>
               </ul>
             </div>
