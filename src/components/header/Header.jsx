@@ -1,8 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../../assets/images/techgrablogo.png";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/config";
+import { toast } from "react-toastify";
 
 const cart = (
   <Link to="/cart" className="nav-link text-light pe-0 ps-1 me-lg-4">
@@ -25,6 +28,19 @@ const login = (
 );
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    signOut(auth)
+      .then(() => {
+        toast.success("Logout Successful!");
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg bg-primary d-lg-flex gap-lg-5">
@@ -110,7 +126,11 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item d-lg-none">
-                  <Link to="/" className="nav-link text-light">
+                  <Link
+                    to="/"
+                    className="nav-link text-light"
+                    onClick={() => logoutUser()}
+                  >
                     Logout
                   </Link>
                 </li>
@@ -127,7 +147,11 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item d-none d-lg-flex justify-content-end">
-                  <Link to="/" className="nav-link text-light">
+                  <Link
+                    to="/"
+                    className="nav-link text-light"
+                    onClick={() => logoutUser()}
+                  >
                     Logout
                   </Link>
                 </li>

@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import registerImg from "../../assets/images/register.png";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import { auth } from "../../firebase/config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Loader from "../../components/loader/Loader";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -14,33 +14,34 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  // Register new user
   const registerUser = (e) => {
     e.preventDefault();
-
+    // Check to see if passwords match
     if (password !== cPassword) {
       toast.error("Passwords do not match.");
+      navigate("/register");
+    } else {
+      setIsLoading(true);
+      // Create user with email and password
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          setIsLoading(false);
+          toast.success("Registration Successful!");
+          navigate("/");
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          toast.error(error.message);
+        });
     }
-
-    setIsLoading(true);
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        setIsLoading(false);
-        toast.success("Registration Successful!");
-        navigate("/");
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        toast.error(error.message);
-      });
   };
 
   return (
     <>
-      <ToastContainer />
       {isLoading && <Loader />}
       <div className="position-absolute top-50 start-50 translate-middle w-100 my-3">
         <div className="d-flex flex-column flex-lg-row justify-content-center gap-3 align-items-center p-5 my-5 w-75 mx-auto">

@@ -1,7 +1,26 @@
 import { Link } from "react-router-dom";
 import resetImg from "../../assets/images/forgot.png";
+import { useState } from "react";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../../firebase/config";
+import { toast } from "react-toastify";
 
 const Reset = () => {
+  const [email, setEmail] = useState("");
+
+  // Reset password
+  const resetPassword = (e) => {
+    e.preventDefault();
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        toast.success("Check your email for a reset link!");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   return (
     <div className="position-absolute top-50 start-50 translate-middle w-100 my-3">
       <div className="d-flex flex-column flex-lg-row justify-content-center gap-3 align-items-center p-5 my-5 w-75 mx-auto">
@@ -10,13 +29,14 @@ const Reset = () => {
         </div>
         <div className="w-100 shadow p-3 rounded-4">
           <h3 className="text-center text-warning py-3">Reset Password</h3>
-          <form action="" className="d-flex flex-column">
+          <form className="d-flex flex-column" onSubmit={resetPassword}>
             <div className="mb-3">
               <input
                 type="email"
                 placeholder="Email"
                 className="form-control"
-                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <button type="submit" className="btn btn-primary w-100 mx-auto">

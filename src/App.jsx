@@ -5,6 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 import RootLayOut from "./layouts/RootLayOut";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import { Home, Login, Register, Reset } from "./pages/index";
 
 const router = createBrowserRouter(
@@ -19,7 +21,12 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <ToastContainer />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
