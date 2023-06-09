@@ -9,15 +9,12 @@ const Reset = () => {
           <img src={resetImg} alt="Login" className="img-fluid" />
         </div>
         <div className="w-100 shadow p-3 rounded-4">
-          <h3 className="text-center text-warning pt-2">Reset Password</h3>
+          <h3 className="text-center text-warning py-3">Reset Password</h3>
           <form action="" className="d-flex flex-column">
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email:
-              </label>
               <input
                 type="email"
-                placeholder="janedoe@example.com"
+                placeholder="Email"
                 className="form-control"
                 id="email"
               />

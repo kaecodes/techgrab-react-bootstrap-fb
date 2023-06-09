@@ -10,26 +10,20 @@ const Login = () => {
           <img src={loginImg} alt="Login" className="img-fluid" />
         </div>
         <div className="w-100 shadow p-3 rounded-4">
-          <h3 className="text-center text-warning pt-2">Login</h3>
+          <h3 className="text-center text-warning py-3">Login</h3>
           <form action="" className="d-flex flex-column">
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email:
-              </label>
               <input
                 type="email"
-                placeholder="janedoe@example.com"
+                placeholder="Email"
                 className="form-control"
                 id="email"
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="password" className="form-label" id="password">
-                Password:
-              </label>
               <input
                 type="password"
-                placeholder="Enter password"
+                placeholder="Password"
                 className="form-control"
               />
             </div>
@@ -53,7 +47,10 @@ const Login = () => {
           <div className="text-center py-1">
             <p>
               Don't have an account?
-              <Link to="/register" className="text-decoration-none">
+              <Link
+                to="/register"
+                className="text-decoration-none text-warning"
+              >
                 &nbsp;Register
               </Link>
             </p>
