@@ -10,7 +10,7 @@ const Login = () => {
           <img src={loginImg} alt="Login" className="img-fluid" />
         </div>
         <div className="w-100 shadow p-3 rounded-4">
-          <h3 className="text-center text-primary">Login</h3>
+          <h3 className="text-center text-warning pt-2">Login</h3>
           <form action="" className="d-flex flex-column">
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
