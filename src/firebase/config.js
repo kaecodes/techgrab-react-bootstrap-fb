@@ -4,8 +4,8 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FB_API_KEY,
+export const firebaseConfig = {
+  apiKey: "AIzaSyCwL3JtILCqQceCutShiiwHrOyJJEkyTTU",
   authDomain: "techgrab-react-bootstrap.firebaseapp.com",
   projectId: "techgrab-react-bootstrap",
   storageBucket: "techgrab-react-bootstrap.appspot.com",

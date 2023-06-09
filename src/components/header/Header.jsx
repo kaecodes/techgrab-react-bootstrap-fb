@@ -49,7 +49,7 @@ const Header = () => {
         <div
           className="offcanvas offcanvas-start offcanvas-lg bg-primary"
           id="offcanvasNav"
-          tabindex="-1"
+          tabIndex="-1"
         >
           <div className="offcanvas-header">
             <img
