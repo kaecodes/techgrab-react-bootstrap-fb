@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../../assets/images/techgrablogo.png";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
 
@@ -28,7 +28,21 @@ const login = (
 );
 
 const Header = () => {
+  const [displayName, setDisplayName] = useState("");
   const navigate = useNavigate();
+
+  // Get the currently signed in user
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(user.displayName);
+        setDisplayName(user.displayName);
+      } else {
+        setDisplayName("");
+      }
+    });
+  }, []);
 
   const logoutUser = () => {
     signOut(auth)
@@ -138,8 +152,12 @@ const Header = () => {
             </div>
             <div className="d-lg-flex justify-content-center align-items-center">
               <ul className="navbar-nav fs-5">
-                <li className="nav-item d-none d-lg-flex justify-content-end">
+                <li className="nav-item d-none d-lg-flex justify-content-end align-items-center">
                   {login}
+                  <a href="#" className="text-light text-decoration-none">
+                    <FaUserCircle size={20} />
+                    &nbsp;Hi, {displayName}
+                  </a>
                 </li>
                 <li className="nav-item d-none d-lg-flex justify-content-end">
                   <Link to="/order-history" className="nav-link text-light">
