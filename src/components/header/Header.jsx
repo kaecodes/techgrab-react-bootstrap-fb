@@ -7,7 +7,10 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { SET_ACTIVE_USER } from "../../redux/features/authSlice";
+import {
+  REMOVE_ACTIVE_USER,
+  SET_ACTIVE_USER,
+} from "../../redux/features/authSlice";
 
 const cart = (
   <Link to="/cart" className="nav-link text-light pe-0 ps-1 me-lg-4">
@@ -38,7 +41,6 @@ const Header = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
         // Create a display name if display name is null
         if (user.displayName === null) {
           // Remove all characters from email after @ including @
@@ -52,14 +54,15 @@ const Header = () => {
           SET_ACTIVE_USER({
             email: user.email,
             userName: user.displayName ? user.displayName : displayName,
-            userID: uid,
+            userID: user.uid,
           })
         );
       } else {
         setDisplayName("");
+        dispatch(REMOVE_ACTIVE_USER());
       }
     });
-  }, []);
+  }, [dispatch, displayName]);
 
   const logoutUser = () => {
     signOut(auth)
