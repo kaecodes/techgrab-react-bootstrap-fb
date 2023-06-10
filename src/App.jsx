@@ -7,7 +7,15 @@ import {
 import RootLayOut from "./layouts/RootLayOut";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { Home, Login, Register, Reset } from "./pages/index";
+import {
+  Home,
+  Login,
+  Register,
+  Reset,
+  About,
+  Contact,
+  Shop,
+} from "./pages/index";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +24,9 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/reset" element={<Reset />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/shop" element={<Shop />} />
     </Route>
   )
 );
