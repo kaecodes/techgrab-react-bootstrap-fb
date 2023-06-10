@@ -15,7 +15,9 @@ import {
   About,
   Contact,
   Shop,
+  Admin,
 } from "./pages/index";
+import AdminOnlyRoute from "./components/adminOnlyRoute/AdminOnlyRoute";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +29,14 @@ const router = createBrowserRouter(
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/shop" element={<Shop />} />
+      <Route
+        path="/admin/*"
+        element={
+          <AdminOnlyRoute>
+            <Admin />
+          </AdminOnlyRoute>
+        }
+      />
     </Route>
   )
 );

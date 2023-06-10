@@ -5,3 +5,4 @@ export { default as Reset } from "../pages/auth/Reset";
 export { default as About } from "../pages/about/About";
 export { default as Contact } from "../pages/contact/Contact";
 export { default as Shop } from "../pages/shop/Shop";
+export { default as Admin } from "../pages/admin/Admin";
