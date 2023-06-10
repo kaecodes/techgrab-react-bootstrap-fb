@@ -91,8 +91,8 @@ const Header = () => {
           </ShowOnLogout>
           <ShowOnLogin>
             <a
-              href="#"
-              className="d-none d-sm-flex justify-content-center align-items-center text-light text-decoration-none fs-4 fs-sm-4 mx-2"
+              href="/"
+              className="d-none d-sm-flex justify-content-center align-items-center text-warning text-decoration-none fs-4 fs-sm-4 mx-2"
             >
               <FaUserCircle />
               &nbsp;Hi, {displayName}
@@ -175,7 +175,10 @@ const Header = () => {
                   </li>
                 </ShowOnLogin>
                 <ShowOnLogin>
-                  <li className="nav-item d-lg-none">
+                  <li
+                    className="nav-item d-lg-none"
+                    data-bs-dismiss="offcanvas"
+                  >
                     <Link
                       to="/"
                       className="nav-link text-light"
@@ -188,34 +191,38 @@ const Header = () => {
               </ul>
             </div>
             <div className="d-lg-flex justify-content-center align-items-center">
-              <ul className="navbar-nav fs-5">
+              <ul className="navbar-nav fs-4">
                 <li className="nav-item d-none d-lg-flex justify-content-end align-items-center">
                   <ShowOnLogout>{login}</ShowOnLogout>
                   <ShowOnLogin>
                     <a
                       href="#"
-                      className="d-flex align-items-center text-light text-decoration-none"
+                      className="d-flex align-items-center text-warning text-decoration-none"
                     >
                       <FaUserCircle />
                       &nbsp;Hi, {displayName}
                     </a>
                   </ShowOnLogin>
                 </li>
-                <li className="nav-item d-none d-lg-flex justify-content-end">
-                  <Link to="/order-history" className="nav-link text-light">
-                    My Orders
-                  </Link>
-                </li>
-                <li className="nav-item d-none d-lg-flex justify-content-end">
-                  <Link
-                    to="/"
-                    className="nav-link text-light"
-                    onClick={() => logoutUser()}
-                  >
-                    Logout
-                  </Link>
-                </li>
-                <li className="nav-item d-none d-lg-flex justify-content-end">
+                <ShowOnLogin>
+                  <li className="nav-item d-none d-lg-flex justify-content-end">
+                    <Link to="/order-history" className="nav-link text-light">
+                      My Orders
+                    </Link>
+                  </li>
+                </ShowOnLogin>
+                <ShowOnLogin>
+                  <li className="nav-item d-none d-lg-flex justify-content-end">
+                    <Link
+                      to="/"
+                      className="nav-link text-light"
+                      onClick={() => logoutUser()}
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                </ShowOnLogin>
+                <li className="nav-item d-none d-lg-flex justify-content-end me-3">
                   {cart}
                 </li>
               </ul>
