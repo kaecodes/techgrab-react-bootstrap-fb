@@ -12,8 +12,8 @@ const AdminOnlyRoute = ({ children }) => {
   } else {
     return (
       <section className="container">
-        <div>
-          <h2>Permission Denied.</h2>
+        <div className="mt-5">
+          <h2 className="text-warning">Permission Denied.</h2>
           <p>This page can only be viewed by an Admin user.</p>
           <br />
           <Link to="/">
