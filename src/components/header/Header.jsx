@@ -12,6 +12,9 @@ import {
   SET_ACTIVE_USER,
 } from "../../redux/features/authSlice";
 import ShowOnLogin, { ShowOnLogout } from "../hiddenLinks/HiddenLink";
+import AdminOnlyRoute, {
+  AdminOnlyLink,
+} from "../adminOnlyRoute/AdminOnlyRoute";
 
 // Reusable variables
 const cart = (
@@ -135,6 +138,16 @@ const Header = () => {
           <div className="offcanvas-body d-flex flex-column flex-lg-row justify-content-between mt-4 mt-lg-0">
             <div>
               <ul className="navbar-nav fs-3">
+                <AdminOnlyRoute>
+                  <li className="nav-item">
+                    <Link
+                      to="/admin/home"
+                      className="nav-link text-warning text-decoration-none"
+                    >
+                      ADMIN
+                    </Link>
+                  </li>
+                </AdminOnlyRoute>
                 <li className="nav-item">
                   <NavLink
                     to="/"
