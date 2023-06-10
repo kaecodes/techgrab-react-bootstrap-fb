@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logoImg from "../../assets/images/techgrablogo.png";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
@@ -11,9 +11,11 @@ import {
   REMOVE_ACTIVE_USER,
   SET_ACTIVE_USER,
 } from "../../redux/features/authSlice";
+import ShowOnLogin, { ShowOnLogout } from "../hiddenLinks/HiddenLink";
 
+// Reusable variables
 const cart = (
-  <Link to="/cart" className="nav-link text-light pe-0 ps-1 me-lg-4">
+  <Link to="/cart" className="nav-link text-light">
     <FaShoppingCart className="d-inline" />
     <p className="d-inline">
       <sup>
@@ -26,7 +28,7 @@ const cart = (
 const login = (
   <Link
     to="/login"
-    className="nav-link text-light d-flex align-items-center justify-content-center p-2"
+    className="nav-link text-light d-flex align-items-center justify-content-center"
   >
     <FaUserCircle />
   </Link>
@@ -83,17 +85,28 @@ const Header = () => {
             <img src={logoImg} alt="Tech Grab logo" width="170px" />
           </Link>
         </div>
-        <div className="d-flex d-lg-none">
-          <div className="fs-3">{login}</div>
-          <div className="fs-3">{cart}</div>
+        <div className="d-flex d-lg-none justify-content-center align-items-center">
+          <ShowOnLogout>
+            <div className="fs-4 fs-sm-4 mx-3">{login}</div>
+          </ShowOnLogout>
+          <ShowOnLogin>
+            <a
+              href="#"
+              className="d-none d-sm-flex justify-content-center align-items-center text-light text-decoration-none fs-4 fs-sm-4 mx-2"
+            >
+              <FaUserCircle />
+              &nbsp;Hi, {displayName}
+            </a>
+          </ShowOnLogin>
+          <div className="fs-6 fs-sm-4">{cart}</div>
           <button
-            className="navbar-toggler border-0 text-light shadow-none me-3"
+            className="navbar-toggler border-0 text-light shadow-none me-3 fs-4 fs-sm-3"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasNav"
             aria-controls="offcanvasNav"
           >
-            <AiOutlineMenu className="fs-3" />
+            <AiOutlineMenu />
           </button>
         </div>
         <div
@@ -111,7 +124,7 @@ const Header = () => {
             <div className="d-flex justify-content-center align-items-center">
               <button
                 type="button"
-                className="text-light bg-transparent fs-4 shadow-none border-0"
+                className="text-light bg-transparent fs-sm-4 fs-6 shadow-none border-0"
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
               >
@@ -123,61 +136,70 @@ const Header = () => {
             <div>
               <ul className="navbar-nav fs-3">
                 <li className="nav-item">
-                  <Link
+                  <NavLink
                     to="/"
                     className="nav-link text-secondary text-decoration-none"
                   >
                     Home
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="nav-item">
-                  <Link
+                <li className="nav-item" data-bs-dismiss="offcanvas">
+                  <NavLink
                     to="/about"
                     className="nav-link text-secondary text-decoration-none"
                   >
                     About
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="nav-item">
-                  <Link
+                <li className="nav-item" data-bs-dismiss="offcanvas">
+                  <NavLink
                     to="/contact"
                     className="nav-link text-secondary text-decoration-none"
                   >
                     Contact
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="nav-item">
-                  <Link
+                <li className="nav-item" data-bs-dismiss="offcanvas">
+                  <NavLink
                     to="/shop"
                     className="nav-link text-secondary text-decoration-none"
                   >
                     Shop
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="nav-item d-lg-none">
-                  <Link to="/order-history" className="nav-link text-light">
-                    My Orders
-                  </Link>
-                </li>
-                <li className="nav-item d-lg-none">
-                  <Link
-                    to="/"
-                    className="nav-link text-light"
-                    onClick={() => logoutUser()}
-                  >
-                    Logout
-                  </Link>
-                </li>
+                <ShowOnLogin>
+                  <li className="nav-item d-lg-none">
+                    <Link to="/order-history" className="nav-link text-light">
+                      My Orders
+                    </Link>
+                  </li>
+                </ShowOnLogin>
+                <ShowOnLogin>
+                  <li className="nav-item d-lg-none">
+                    <Link
+                      to="/"
+                      className="nav-link text-light"
+                      onClick={() => logoutUser()}
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                </ShowOnLogin>
               </ul>
             </div>
             <div className="d-lg-flex justify-content-center align-items-center">
               <ul className="navbar-nav fs-5">
                 <li className="nav-item d-none d-lg-flex justify-content-end align-items-center">
-                  {login}
-                  <a href="#" className="text-light text-decoration-none">
-                    <FaUserCircle size={20} />
-                    &nbsp;Hi, {displayName}
-                  </a>
+                  <ShowOnLogout>{login}</ShowOnLogout>
+                  <ShowOnLogin>
+                    <a
+                      href="#"
+                      className="d-flex align-items-center text-light text-decoration-none"
+                    >
+                      <FaUserCircle />
+                      &nbsp;Hi, {displayName}
+                    </a>
+                  </ShowOnLogin>
                 </li>
                 <li className="nav-item d-none d-lg-flex justify-content-end">
                   <Link to="/order-history" className="nav-link text-light">
