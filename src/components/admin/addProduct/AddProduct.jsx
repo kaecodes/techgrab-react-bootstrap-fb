@@ -15,21 +15,29 @@ const AddProduct = () => {
   const [product, setProduct] = useState({
     name: "",
     imageURL: "",
-    price: null,
+    price: 0,
     category: "",
     brand: "",
     desc: "",
   });
 
-  const handleInputChange = (e) => {};
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProduct({ ...product, [name]: value });
+  };
   const handleImageChange = (e) => {};
+
+  const addProduct = (e) => {
+    e.preventDefault();
+    console.log(product);
+  };
 
   return (
     <div className="container-md px-4 py-2">
       <h2 className="py-1 my-3 text-center text-success fw-bold">
         Add New Product
       </h2>
-      <form className="shadow p-3 rounded mb-3">
+      <form className="shadow p-3 rounded mb-3" onSubmit={addProduct}>
         <div className="mb-3">
           <label className="form-label">Product Name:</label>
           <input
@@ -60,7 +68,8 @@ const AddProduct = () => {
             />
             <input
               type="text"
-              required
+              //
+              placeholder="imageURL"
               className="form-control"
               name="imageURL"
               value={product.imageURL}
@@ -94,7 +103,7 @@ const AddProduct = () => {
             </option>
             {category.map((cat) => {
               return (
-                <option key={cat.index} value={cat.name}>
+                <option key={cat.id} value={cat.name}>
                   {cat.name}
                 </option>
               );
