@@ -93,7 +93,7 @@ const Header = () => {
           <ShowOnLogin>
             <a
               href="/"
-              className="d-none d-sm-flex justify-content-center align-items-center text-warning text-decoration-none fs-4 fs-sm-4 mx-2"
+              className="d-none d-sm-flex justify-content-center align-items-center text-warning text-decoration-none fs-6 fs-md-5 mx-2"
             >
               <FaUserCircle />
               &nbsp;Hi, {displayName}
@@ -133,9 +133,9 @@ const Header = () => {
               </button>
             </div>
           </div>
-          <div className="offcanvas-body d-flex flex-column flex-lg-row justify-content-between mt-4 mt-lg-0">
+          <div className="offcanvas-body d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mt-4 mt-lg-0">
             <div>
-              <ul className="navbar-nav fs-3">
+              <ul className="navbar-nav fs-4 fs-xl-1">
                 <AdminOnlyLink>
                   <li className="nav-item">
                     <Link
@@ -202,7 +202,7 @@ const Header = () => {
               </ul>
             </div>
             <div className="d-lg-flex justify-content-center align-items-center">
-              <ul className="navbar-nav fs-4">
+              <ul className="navbar-nav fs-6 fs-xl-5">
                 <li className="nav-item d-none d-lg-flex justify-content-end align-items-center">
                   <ShowOnLogout>{login}</ShowOnLogout>
                   <ShowOnLogin>

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
 $midnight-green: #004e64;
 $pacific-cyan: #00a5cf;
 $aquamarine: #9fffcb;
@@ -8,11 +10,71 @@ $accent-orange: #ff6f00;
 $primary: $midnight-green;
 $secondary: $light-green;
 $warning: $accent-orange;
+$info: $aquamarine;
 
 $offcanvas-horizontal-width: 60%;
 $offcanvas-padding-x: 2rem;
 
 $enable-shadows: true;
+
+$hr-margin-y: 0;
+
+$font-family-sans-serif: "Ubuntu", sans-serif;
+
+$utilities: (
+  "width": (
+    property: width,
+    class: w,
+    responsive: true,
+    values: (
+      25: 25%,
+      33: 33%,
+      50: 50%,
+      66: 66%,
+      75: 75%,
+      100: 100%,
+      auto: auto,
+    ),
+  ),
+  "height": (
+    property: height,
+    class: h,
+    responsive: true,
+    values: (
+      25: 25%,
+      33: 33%,
+      50: 50%,
+      66: 66%,
+      75: 75%,
+      100: 100%,
+      auto: auto,
+    ),
+  ),
+  "min-viewport-width": (
+    property: min-width,
+    class: min-vw,
+    responsive: true,
+    values: (
+      100: 100vw,
+      75: 75vw,
+      50: 50vw,
+      25: 25vw,
+      15: 15vw,
+    ),
+  ),
+  "min-viewport-height": (
+    property: min-height,
+    class: min-vh,
+    responsive: true,
+    values: (
+      100: 100vh,
+      75: 75vh,
+      50: 50vh,
+      25: 25vh,
+      15: 15vh,
+    ),
+  ),
+);
 
 // Import all of Bootstrap's CSS
 @import "~bootstrap/scss/bootstrap";
