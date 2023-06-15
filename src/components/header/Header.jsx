@@ -79,7 +79,7 @@ const Header = () => {
   };
 
   return (
-    <header>
+    <header className="sticky-top">
       <nav className="navbar navbar-expand-lg bg-primary d-lg-flex gap-lg-5">
         <div>
           <Link to="/" className="navbar-brand mx-4">

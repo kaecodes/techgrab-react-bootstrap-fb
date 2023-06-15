@@ -5,7 +5,7 @@ const Footer = () => {
   const year = date.getFullYear();
 
   return (
-    <footer className="bg-primary text-center p-4 text-light fixed-bottom">
+    <footer className="bg-primary text-center p-4 text-light">
       &copy; {year} Tech Grab, LLC. All rights reserved.
     </footer>
   );
