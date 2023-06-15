@@ -1,7 +1,134 @@
-import React from "react";
+import { useState } from "react";
+
+const category = [
+  { id: 1, name: "Laptops" },
+  { id: 2, name: "Smartphones" },
+  { id: 3, name: "Smartwatches" },
+  { id: 4, name: "Bluetooth Speakers" },
+  { id: 5, name: "Cameras" },
+  { id: 6, name: "Tablets" },
+  { id: 7, name: "Headphones" },
+  { id: 8, name: "Gaming" },
+];
 
 const AddProduct = () => {
-  return <div>AddProduct</div>;
+  const [product, setProduct] = useState({
+    name: "",
+    imageURL: "",
+    price: null,
+    category: "",
+    brand: "",
+    desc: "",
+  });
+
+  const handleInputChange = (e) => {};
+  const handleImageChange = (e) => {};
+
+  return (
+    <div className="container-md px-4 py-2">
+      <h2 className="py-1 my-3 text-center text-success fw-bold">
+        Add New Product
+      </h2>
+      <form className="shadow p-3 rounded mb-3">
+        <div className="mb-3">
+          <label className="form-label">Product Name:</label>
+          <input
+            type="text"
+            placeholder="Product Name"
+            className="form-control"
+            required
+            name="name"
+            value={product.name}
+            onChange={(e) => handleInputChange(e)}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Product Image:</label>
+          <div className="border p-3 rounded">
+            <div className="mb-2">
+              <div className="w-50 bg-primary text-light py-1 px-4 rounded-5">
+                Uploading 50%
+              </div>
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              placeholder="Product Image"
+              className="form-control mb-2"
+              name="image"
+              onChange={(e) => handleImageChange(e)}
+            />
+            <input
+              type="text"
+              required
+              className="form-control"
+              name="imageURL"
+              value={product.imageURL}
+              disabled
+            />
+          </div>
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Product Price:</label>
+          <input
+            type="number"
+            placeholder="Product Price"
+            className="form-control"
+            required
+            name="price"
+            value={product.price}
+            onChange={(e) => handleInputChange(e)}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Product Category:</label>
+          <select
+            required
+            name="category"
+            className="form-select"
+            value={product.category}
+            onChange={(e) => handleInputChange(e)}
+          >
+            <option value="" disabled>
+              Choose Product Category
+            </option>
+            {category.map((cat) => {
+              return (
+                <option key={cat.index} value={cat.name}>
+                  {cat.name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Product Brand:</label>
+          <input
+            type="text"
+            placeholder="Product Brand"
+            className="form-control"
+            required
+            name="brand"
+            value={product.brand}
+            onChange={(e) => handleInputChange(e)}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Product Description:</label>
+          <textarea
+            name="desc"
+            className="form-control"
+            required
+            value={product.desc}
+            cols="30"
+            rows="10"
+            onChange={(e) => handleInputChange(e)}
+          ></textarea>
+        </div>
+        <button className="btn btn-primary">Save Product</button>
+      </form>
+    </div>
+  );
 };
 
 export default AddProduct;
