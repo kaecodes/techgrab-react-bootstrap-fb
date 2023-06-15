@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ref, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../../../firebase/config";
 
 const category = [
   { id: 1, name: "Laptops" },
@@ -25,7 +27,14 @@ const AddProduct = () => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
   };
-  const handleImageChange = (e) => {};
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    const storageRef = ref(storage, `techgrab/${Date.now()}${file.name}`);
+
+    // Upload the file and metadata
+    const uploadTask = uploadBytesResumable(storageRef, file);
+  };
 
   const addProduct = (e) => {
     e.preventDefault();
