@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ref, uploadBytesResumable } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../firebase/config";
+import { toast } from "react-toastify";
 
 const category = [
   { id: 1, name: "Laptops" },
@@ -22,6 +23,7 @@ const AddProduct = () => {
     brand: "",
     desc: "",
   });
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +36,27 @@ const AddProduct = () => {
 
     // Upload the file and metadata
     const uploadTask = uploadBytesResumable(storageRef, file);
+
+    // Monitor upload progress
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (
+          (snapshot.bytesTransferred / snapshot.totalBytes) *
+          100
+        ).toFixed();
+        setUploadProgress(progress);
+      },
+      (error) => {
+        toast.error(error.message);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setProduct({ ...product, imageURL: downloadURL });
+          toast.success("Image uploaded successfully!");
+        });
+      }
+    );
   };
 
   const addProduct = (e) => {
@@ -62,10 +85,24 @@ const AddProduct = () => {
         <div className="mb-3">
           <label className="form-label">Product Image:</label>
           <div className="border p-3 rounded">
-            <div className="mb-2">
-              <div className="w-50 bg-primary text-light py-1 px-4 rounded-5">
-                Uploading 50%
-              </div>
+            <div className="mb-2 text-center">
+              {uploadProgress === 0 ? null : (
+                <div
+                  style={{ backgroundColor: "#a9a9a9" }}
+                  className="rounded-5"
+                >
+                  <div
+                    className="bg-primary text-light py-1 px-4 rounded-5"
+                    style={{ width: `${uploadProgress}%` }}
+                  >
+                    <small>
+                      {uploadProgress < 100
+                        ? `${uploadProgress}%`
+                        : `${uploadProgress}%`}
+                    </small>
+                  </div>
+                </div>
+              )}
             </div>
             <input
               type="file"
@@ -75,15 +112,17 @@ const AddProduct = () => {
               name="image"
               onChange={(e) => handleImageChange(e)}
             />
-            <input
-              type="text"
-              //
-              placeholder="imageURL"
-              className="form-control"
-              name="imageURL"
-              value={product.imageURL}
-              disabled
-            />
+            {product.imageURL === "" ? null : (
+              <input
+                type="text"
+                //
+                placeholder="imageURL"
+                className="form-control"
+                name="imageURL"
+                value={product.imageURL}
+                disabled
+              />
+            )}
           </div>
         </div>
         <div className="mb-3">
