@@ -28,7 +28,10 @@ const Navbar = () => {
           </li>
           <hr />
           <li className="nav-item text-center py-2">
-            <NavLink to="/admin/add-product" className="text-decoration-none">
+            <NavLink
+              to="/admin/add-product/ADD"
+              className="text-decoration-none"
+            >
               Add Product
             </NavLink>
           </li>
