@@ -14,10 +14,14 @@ import { Link } from "react-router-dom";
 import Loader from "../../loader/Loader";
 import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
+import { useDispatch } from "react-redux";
+import { STORE_PRODUCTS } from "../../../redux/features/productSlice";
 
 const ViewProducts = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getProducts();
@@ -40,6 +44,13 @@ const ViewProducts = () => {
         }));
         setIsLoading(false);
         setProducts(allProducts);
+
+        // Get all products from firebase and saving them to redux
+        dispatch(
+          STORE_PRODUCTS({
+            products: allProducts,
+          })
+        );
       });
     } catch (error) {
       setIsLoading(false);

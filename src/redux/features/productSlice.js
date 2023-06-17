@@ -8,9 +8,10 @@ const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    // Store products in redux
+    // Store products in redux to access anywhere in app
     STORE_PRODUCTS: (state, action) => {
       console.log(action.payload);
+      state.products = action.payload.products;
     },
   },
 });
