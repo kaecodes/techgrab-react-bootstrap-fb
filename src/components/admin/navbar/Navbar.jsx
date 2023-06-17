@@ -13,7 +13,7 @@ const Navbar = () => {
         <FaUserCircle />
         <h3>{userName}</h3>
       </div>
-      <nav className="w-100 min-vh-md-100 border-end">
+      <nav className="w-100">
         <ul className="navbar-nav">
           <li className="nav-item text-center py-2">
             <NavLink to="/admin/home" className="text-decoration-none">

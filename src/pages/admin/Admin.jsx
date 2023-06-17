@@ -9,10 +9,10 @@ import Navbar from "../../components/admin/navbar/Navbar";
 const Admin = () => {
   return (
     <section className="d-flex flex-column flex-md-row">
-      <div className="w-md-25">
+      <div className="w-md-25 border-end">
         <Navbar />
       </div>
-      <div className="w-md-75">
+      <div className="w-md-75 min-vh-md-100">
         <Routes>
           <Route path="home" element={<Home />} />
           <Route path="view-products" element={<ViewProducts />} />

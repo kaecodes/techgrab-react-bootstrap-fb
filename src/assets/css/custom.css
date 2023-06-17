@@ -7783,6 +7783,10 @@ textarea.form-control-lg {
   min-height: 100vh !important;
 }
 
+.min-vh-85 {
+  min-height: 85vh !important;
+}
+
 .min-vh-75 {
   min-height: 75vh !important;
 }
@@ -9384,6 +9388,9 @@ textarea.form-control-lg {
   .min-vh-sm-100 {
     min-height: 100vh !important;
   }
+  .min-vh-sm-85 {
+    min-height: 85vh !important;
+  }
   .min-vh-sm-75 {
     min-height: 75vh !important;
   }
@@ -10034,6 +10041,9 @@ textarea.form-control-lg {
   }
   .min-vh-md-100 {
     min-height: 100vh !important;
+  }
+  .min-vh-md-85 {
+    min-height: 85vh !important;
   }
   .min-vh-md-75 {
     min-height: 75vh !important;
@@ -10686,6 +10696,9 @@ textarea.form-control-lg {
   .min-vh-lg-100 {
     min-height: 100vh !important;
   }
+  .min-vh-lg-85 {
+    min-height: 85vh !important;
+  }
   .min-vh-lg-75 {
     min-height: 75vh !important;
   }
@@ -11337,6 +11350,9 @@ textarea.form-control-lg {
   .min-vh-xl-100 {
     min-height: 100vh !important;
   }
+  .min-vh-xl-85 {
+    min-height: 85vh !important;
+  }
   .min-vh-xl-75 {
     min-height: 75vh !important;
   }
@@ -11987,6 +12003,9 @@ textarea.form-control-lg {
   }
   .min-vh-xxl-100 {
     min-height: 100vh !important;
+  }
+  .min-vh-xxl-85 {
+    min-height: 85vh !important;
   }
   .min-vh-xxl-75 {
     min-height: 75vh !important;

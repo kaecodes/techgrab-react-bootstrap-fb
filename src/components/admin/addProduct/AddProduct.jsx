@@ -97,11 +97,11 @@ const AddProduct = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <div className="container-md px-4 py-2">
+      <div className="container-md px-4 pt-2 mb-5 w-lg-75">
         <h2 className="py-1 my-3 text-center text-success fw-bold">
           Add New Product
         </h2>
-        <form className="shadow p-3 rounded mb-3" onSubmit={addProduct}>
+        <form className="shadow p-3 rounded" onSubmit={addProduct}>
           <div className="mb-3">
             <label className="form-label">Product Name:</label>
             <input
