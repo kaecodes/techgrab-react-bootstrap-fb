@@ -3,7 +3,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "../../../firebase/config";
 import { toast } from "react-toastify";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../loader/Loader";
 
 const category = [
@@ -27,11 +27,19 @@ const initialState = {
 };
 
 const AddProduct = () => {
+  const { id } = useParams();
   const [product, setProduct] = useState({ ...initialState });
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  const detectForm = (id, fxAdd, fxEdit) => {
+    if (id === "ADD") {
+      return fxAdd;
+    }
+    return fxEdit;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -94,14 +102,19 @@ const AddProduct = () => {
     }
   };
 
+  const editProduct = () => {};
+
   return (
     <>
       {isLoading && <Loader />}
       <div className="container-md px-4 pt-2 mb-5 w-lg-75">
         <h2 className="py-1 my-3 text-center text-success fw-bold">
-          Add New Product
+          {detectForm(id, "Add New Product", "Edit Product")}
         </h2>
-        <form className="shadow p-3 rounded" onSubmit={addProduct}>
+        <form
+          className="shadow p-3 rounded"
+          onSubmit={detectForm(id, addProduct, editProduct)}
+        >
           <div className="mb-3">
             <label className="form-label">Product Name:</label>
             <input
@@ -214,7 +227,9 @@ const AddProduct = () => {
               onChange={(e) => handleInputChange(e)}
             ></textarea>
           </div>
-          <button className="btn btn-primary">Save Product</button>
+          <button className="btn btn-primary">
+            {detectForm(id, "Save Product", "Edit Product")}
+          </button>
         </form>
       </div>
     </>
