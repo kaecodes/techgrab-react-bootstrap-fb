@@ -13,6 +13,8 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Loader from "../../loader/Loader";
 import { deleteObject, ref } from "firebase/storage";
+import Notiflix from "notiflix";
+
 const ViewProducts = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,6 +45,29 @@ const ViewProducts = () => {
       setIsLoading(false);
       toast.error(error.message);
     }
+  };
+
+  const confirmDelete = (id, imageURL) => {
+    Notiflix.Confirm.show(
+      "Delete Product",
+      "Are you sure you want to delete the selected product?",
+      "Delete",
+      "Cancel",
+      function okCb() {
+        deleteProduct(id, imageURL);
+      },
+      function cancelCb() {
+        console.log("Cancelled");
+      },
+      {
+        width: "320px",
+        borderRadius: "8px",
+        titleColor: "orangered",
+        okButtonBackground: "orangered",
+        cssAnimationStyle: "zoom",
+        plainText: true,
+      }
+    );
   };
 
   // Delete a product (data and image)
@@ -107,7 +132,7 @@ const ViewProducts = () => {
                         size={18}
                         color="red"
                         role="button"
-                        onClick={() => deleteProduct(id, imageURL)}
+                        onClick={() => confirmDelete(id, imageURL)}
                       />
                     </td>
                   </tr>
