@@ -7707,6 +7707,10 @@ textarea.form-control-lg {
   width: 75% !important;
 }
 
+.w-80 {
+  width: 80% !important;
+}
+
 .w-100 {
   width: 100% !important;
 }
@@ -9343,6 +9347,9 @@ textarea.form-control-lg {
   .w-sm-75 {
     width: 75% !important;
   }
+  .w-sm-80 {
+    width: 80% !important;
+  }
   .w-sm-100 {
     width: 100% !important;
   }
@@ -9996,6 +10003,9 @@ textarea.form-control-lg {
   }
   .w-md-75 {
     width: 75% !important;
+  }
+  .w-md-80 {
+    width: 80% !important;
   }
   .w-md-100 {
     width: 100% !important;
@@ -10651,6 +10661,9 @@ textarea.form-control-lg {
   .w-lg-75 {
     width: 75% !important;
   }
+  .w-lg-80 {
+    width: 80% !important;
+  }
   .w-lg-100 {
     width: 100% !important;
   }
@@ -11305,6 +11318,9 @@ textarea.form-control-lg {
   .w-xl-75 {
     width: 75% !important;
   }
+  .w-xl-80 {
+    width: 80% !important;
+  }
   .w-xl-100 {
     width: 100% !important;
   }
@@ -11958,6 +11974,9 @@ textarea.form-control-lg {
   }
   .w-xxl-75 {
     width: 75% !important;
+  }
+  .w-xxl-80 {
+    width: 80% !important;
   }
   .w-xxl-100 {
     width: 100% !important;

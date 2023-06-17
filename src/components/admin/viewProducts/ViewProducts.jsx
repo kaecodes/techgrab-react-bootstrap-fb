@@ -1,9 +1,18 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { db } from "../../../firebase/config";
+import { db, storage } from "../../../firebase/config";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Loader from "../../loader/Loader";
+import { deleteObject, ref } from "firebase/storage";
 const ViewProducts = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +21,7 @@ const ViewProducts = () => {
     getProducts();
   }, []);
 
+  // Get all products from database
   const getProducts = () => {
     setIsLoading(true);
 
@@ -26,7 +36,6 @@ const ViewProducts = () => {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(allProducts);
         setIsLoading(false);
         setProducts(allProducts);
       });
@@ -36,9 +45,25 @@ const ViewProducts = () => {
     }
   };
 
+  // Delete a product (data and image)
+  const deleteProduct = async (id, imageURL) => {
+    try {
+      // Delete a document from collection
+      await deleteDoc(doc(db, "products", id));
+      // Delete image from storage - Create a reference to the file to delete
+      const storageRef = ref(storage, imageURL);
+      // Delete the file
+      await deleteObject(storageRef);
+      toast.success("Product deleted successfully!");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <>
-      <div className="container">
+      {isLoading && <Loader />}
+      <div className="container w-md-80">
         <h2 className="py-1 my-3 text-center text-success fw-bold">
           All Products
         </h2>
@@ -78,7 +103,12 @@ const ViewProducts = () => {
                         <FaEdit size={20} color="green" />
                       </Link>
                       &nbsp;&nbsp;&nbsp;
-                      <FaTrashAlt size={18} color="red" />
+                      <FaTrashAlt
+                        size={18}
+                        color="red"
+                        role="button"
+                        onClick={() => deleteProduct(id, imageURL)}
+                      />
                     </td>
                   </tr>
                 );
