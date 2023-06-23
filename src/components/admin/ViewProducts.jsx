@@ -14,50 +14,31 @@ import { Link } from "react-router-dom";
 import Loader from "../Loader";
 import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
-import { useDispatch } from "react-redux";
-import { STORE_PRODUCTS } from "../../redux/features/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  STORE_PRODUCTS,
+  selectProducts,
+} from "../../redux/features/productSlice";
+import useFetchCollection from "../../customHooks/useFetchCollection";
 
 const ViewProducts = () => {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // Get data from products collection in database
+  const { data, isLoading } = useFetchCollection("products");
+  // Get products from redux store
+  const products = useSelector(selectProducts);
 
   const dispatch = useDispatch();
 
+  // Get products collection from database using data from custom hook
   useEffect(() => {
-    getProducts();
-  }, []);
+    dispatch(
+      STORE_PRODUCTS({
+        products: data,
+      })
+    );
+  }, [dispatch, data]);
 
-  // Get all products from database
-  const getProducts = () => {
-    setIsLoading(true);
-
-    try {
-      // Get a reference of all the products
-      const productsRef = collection(db, "products");
-      // Query how data will be fetched from database
-      const q = query(productsRef, orderBy("createdAt", "desc"));
-      // Snapshot handler will receive a new query snapshot every time the query results change
-      onSnapshot(q, (querySnapshot) => {
-        const allProducts = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setIsLoading(false);
-        setProducts(allProducts);
-
-        // Get all products from firebase and saving them to redux
-        dispatch(
-          STORE_PRODUCTS({
-            products: allProducts,
-          })
-        );
-      });
-    } catch (error) {
-      setIsLoading(false);
-      toast.error(error.message);
-    }
-  };
-
+  // Confirm delete product
   const confirmDelete = (id, imageURL) => {
     Notiflix.Confirm.show(
       "Delete Product",
