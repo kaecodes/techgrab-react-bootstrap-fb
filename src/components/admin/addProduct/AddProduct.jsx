@@ -1,10 +1,17 @@
 import { useState } from "react";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { db, storage } from "../../../firebase/config";
 import { toast } from "react-toastify";
-import { Timestamp, addDoc, collection } from "firebase/firestore";
+import { Timestamp, addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../loader/Loader";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../../redux/features/productSlice";
 
 const category = [
   { id: 1, name: "Laptops" },
@@ -28,18 +35,23 @@ const initialState = {
 
 const AddProduct = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState({ ...initialState });
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
-
+  const products = useSelector(selectProducts); // Get all products from redux
+  const productEdit = products.find((item) => item.id === id); // Find the edit product in products array
   const detectForm = (id, fxAdd, fxEdit) => {
     if (id === "ADD") {
       return fxAdd;
     }
     return fxEdit;
   };
+  const [product, setProduct] = useState(() => {
+    // Create a new state based on which form is detected
+    const newState = detectForm(id, { ...initialState }, productEdit);
+    return newState;
+  });
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -76,6 +88,7 @@ const AddProduct = () => {
     );
   };
 
+  // Add Product
   const addProduct = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -102,7 +115,38 @@ const AddProduct = () => {
     }
   };
 
-  const editProduct = () => {};
+  // Edit Product
+  const editProduct = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    // Check if the image has changed; if changed, delete previous image
+    if (product.imageURL !== productEdit.imageURL) {
+      const storageRef = ref(storage, productEdit.imageURL);
+      // Delete the old image
+      deleteObject(storageRef);
+    }
+
+    try {
+      // Look at database for a particular doc and update doc accordingly
+      setDoc(doc(db, "products", id), {
+        name: product.name,
+        imageURL: product.imageURL,
+        price: Number(product.price),
+        category: product.category,
+        brand: product.brand,
+        desc: product.desc,
+        createdAt: productEdit.createdAt, // Preserve initial value
+        editedAt: Timestamp.now().toDate(),
+      });
+      setIsLoading(false);
+      toast.success("Product updated successfully!");
+      navigate("/admin/view-products");
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.message);
+    }
+  };
 
   return (
     <>
