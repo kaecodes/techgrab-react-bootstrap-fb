@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectEmail } from "../../redux/features/authSlice";
+import { selectEmail } from "../redux/features/authSlice";
 import { Link } from "react-router-dom";
 
 const AdminOnlyRoute = ({ children }) => {

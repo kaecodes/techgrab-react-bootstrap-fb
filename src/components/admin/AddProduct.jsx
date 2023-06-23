@@ -5,13 +5,13 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { db, storage } from "../../../firebase/config";
+import { db, storage } from "../../firebase/config";
 import { toast } from "react-toastify";
 import { Timestamp, addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
-import Loader from "../../loader/Loader";
+import Loader from "../Loader";
 import { useSelector } from "react-redux";
-import { selectProducts } from "../../../redux/features/productSlice";
+import { selectProducts } from "../../redux/features/productSlice";
 
 const category = [
   { id: 1, name: "Laptops" },

@@ -3,7 +3,7 @@ import registerImg from "../../assets/images/register.png";
 import { useState } from "react";
 import { auth } from "../../firebase/config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import Loader from "../../components/loader/Loader";
+import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
 
 const Register = () => {

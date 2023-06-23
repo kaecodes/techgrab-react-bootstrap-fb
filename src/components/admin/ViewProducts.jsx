@@ -8,14 +8,14 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { db, storage } from "../../../firebase/config";
+import { db, storage } from "../../firebase/config";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Loader from "../../loader/Loader";
+import Loader from "../Loader";
 import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
 import { useDispatch } from "react-redux";
-import { STORE_PRODUCTS } from "../../../redux/features/productSlice";
+import { STORE_PRODUCTS } from "../../redux/features/productSlice";
 
 const ViewProducts = () => {
   const [products, setProducts] = useState([]);

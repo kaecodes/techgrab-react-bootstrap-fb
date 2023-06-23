@@ -1,4 +1,4 @@
-import loaderImg from "../../assets/images/loader.gif";
+import loaderImg from "../assets/images/loader.gif";
 import ReactDOM from "react-dom";
 
 const Loader = () => {

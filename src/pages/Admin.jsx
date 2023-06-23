@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "../../components/admin/home/Home";
-import ViewProducts from "../../components/admin/viewProducts/ViewProducts";
-import AddProduct from "../../components/admin/addProduct/AddProduct";
-import Orders from "../../components/admin/orders/Orders";
-import OrderDetails from "../../components/admin/orderDetails/OrderDetails";
-import Navbar from "../../components/admin/navbar/Navbar";
+import Home from "../components/admin/Home";
+import ViewProducts from "../components/admin/ViewProducts";
+import AddProduct from "../components/admin/AddProduct";
+import Orders from "../components/admin/Orders";
+import OrderDetails from "../components/admin/OrderDetails";
+import Navbar from "../components/admin/Navbar";
 
 const Admin = () => {
   return (

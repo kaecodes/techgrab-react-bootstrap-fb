@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectUserName } from "../../../redux/features/authSlice";
+import { selectUserName } from "../../redux/features/authSlice";
 import { FaUserCircle } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";

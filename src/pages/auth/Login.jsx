@@ -10,7 +10,7 @@ import {
 import { auth } from "../../firebase/config";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import Loader from "../../components/loader/Loader";
+import Loader from "../../components/Loader";
 
 const Login = () => {
   const [email, setEmail] = useState("");

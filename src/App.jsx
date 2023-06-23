@@ -17,7 +17,7 @@ import {
   Shop,
   Admin,
 } from "./pages/index";
-import AdminOnlyRoute from "./components/adminOnlyRoute/AdminOnlyRoute";
+import AdminOnlyRoute from "./components/AdminOnlyRoute";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

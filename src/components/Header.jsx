@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import logoImg from "../../assets/images/techgrablogo.png";
+import logoImg from "../assets/images/techgrablogo.png";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../../firebase/config";
+import { auth } from "../firebase/config";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import {
   REMOVE_ACTIVE_USER,
   SET_ACTIVE_USER,
-} from "../../redux/features/authSlice";
-import ShowOnLogin, { ShowOnLogout } from "../hiddenLinks/HiddenLink";
-import { AdminOnlyLink } from "../adminOnlyRoute/AdminOnlyRoute";
+} from "../redux/features/authSlice";
+import ShowOnLogin, { ShowOnLogout } from "./HiddenLink";
+import { AdminOnlyLink } from "../components/AdminOnlyRoute";
 
 // Reusable variables
 const cart = (
