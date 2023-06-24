@@ -42,14 +42,15 @@ const ProductList = ({ products }) => {
           </select>
         </div>
       </div>
-      <div className={grid ? "row" : "d-flex flex-column"}>
+      <hr className="mb-3" />
+      <div className={grid ? "row g-3 mb-3" : "d-flex flex-column gap-3 mb-3"}>
         {products.length === 0 ? (
           <p>No Products Found</p>
         ) : (
           <>
             {products.map((product) => {
               return (
-                <div key={product.id} className="col-lg-4">
+                <div key={product.id} className={grid ? "col-lg-4" : "w-100"}>
                   <ProductItem {...product} grid={grid} product={product} />
                 </div>
               );
