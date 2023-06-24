@@ -2,8 +2,9 @@ import { useState } from "react";
 import { BsFillGridFill } from "react-icons/bs";
 import { FaListAlt } from "react-icons/fa";
 import Search from "../Search";
+import ProductItem from "./ProductItem";
 
-const ProductList = () => {
+const ProductList = ({ products }) => {
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");
 
@@ -40,6 +41,21 @@ const ProductList = () => {
             <option value="z-a">Z - A</option>
           </select>
         </div>
+      </div>
+      <div className={grid ? "row" : "d-flex flex-column"}>
+        {products.length === 0 ? (
+          <p>No Products Found</p>
+        ) : (
+          <>
+            {products.map((product) => {
+              return (
+                <div key={product.id} className="col-lg-4">
+                  <ProductItem {...product} grid={grid} product={product} />
+                </div>
+              );
+            })}
+          </>
+        )}
       </div>
     </div>
   );
