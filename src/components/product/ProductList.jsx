@@ -9,7 +9,7 @@ const ProductList = ({ products }) => {
   const [search, setSearch] = useState("");
 
   return (
-    <div className="container py-2">
+    <div className="container pt-2">
       <div className="d-flex justify-content-between">
         <div className="d-flex gap-2 align-items-center">
           <BsFillGridFill
@@ -50,7 +50,10 @@ const ProductList = ({ products }) => {
           <>
             {products.map((product) => {
               return (
-                <div key={product.id} className={grid ? "col-lg-4" : "w-100"}>
+                <div
+                  key={product.id}
+                  className={grid ? "col-lg-4 col-md-6" : "w-100"}
+                >
                   <ProductItem {...product} grid={grid} product={product} />
                 </div>
               );

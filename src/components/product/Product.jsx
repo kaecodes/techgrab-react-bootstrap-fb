@@ -7,6 +7,7 @@ import {
   selectProducts,
 } from "../../redux/features/productSlice";
 import { useDispatch, useSelector } from "react-redux";
+import spinnerImg from "../../assets/images/spinner.jpg";
 
 const Product = () => {
   // Get data from products collection in database
@@ -26,11 +27,20 @@ const Product = () => {
   }, [dispatch, data]);
   return (
     <section className="container d-flex gap-4 flex-column flex-md-row">
-      <aside className="w-100 w-md-25">
-        <ProductFilter />
+      <aside className="d-none d-md-block w-md-25">
+        {isLoading ? null : <ProductFilter />}
       </aside>
       <div className="w-100 w-md-75">
-        <ProductList products={products} />
+        {isLoading ? (
+          <img
+            src={spinnerImg}
+            alt="Loading..."
+            style={{ width: "100px" }}
+            className="position-fixed top-50 start-50 translate-middle"
+          />
+        ) : (
+          <ProductList products={products} />
+        )}
       </div>
     </section>
   );
