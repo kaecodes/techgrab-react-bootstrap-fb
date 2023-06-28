@@ -80,7 +80,7 @@ const ViewProducts = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <div className="container w-md-80">
+      <div className="container w-md-80 mb-8">
         <h2 className="py-1 my-3 text-center text-success fw-bold">
           All Products
         </h2>

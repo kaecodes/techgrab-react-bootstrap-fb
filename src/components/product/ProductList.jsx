@@ -9,7 +9,7 @@ const ProductList = ({ products }) => {
   const [search, setSearch] = useState("");
 
   return (
-    <div className="container pt-2">
+    <div className="container pt-2 mb-8">
       <div className="d-flex justify-content-between">
         <div className="d-flex gap-2 align-items-center">
           <BsFillGridFill

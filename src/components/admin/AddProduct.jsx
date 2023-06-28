@@ -151,7 +151,7 @@ const AddProduct = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <div className="container-md px-4 pt-2 mb-5 w-lg-75">
+      <div className="container-md px-4 pt-2 mb-5 w-lg-75 mb-8">
         <h2 className="py-1 my-3 text-center text-success fw-bold">
           {detectForm(id, "Add New Product", "Edit Product")}
         </h2>
