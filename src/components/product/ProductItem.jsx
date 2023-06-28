@@ -15,7 +15,7 @@ const ProductItem = ({ product, grid, id, name, imageURL, price, desc }) => {
       className={grid ? "card p-2 shadow" : "card p-3 shadow d-flex flex-row"}
     >
       <div className="d-flex justify-content-center align-items-center">
-        <Link to={`/product-details`}>
+        <Link to={`/product-details/${id}`}>
           <img
             src={imageURL}
             alt={name}

@@ -16,6 +16,7 @@ import {
   Contact,
   Shop,
   Admin,
+  ProductDetails,
 } from "./pages/index";
 import AdminOnlyRoute from "./components/AdminOnlyRoute";
 
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
           </AdminOnlyRoute>
         }
       />
+      <Route path="/product-details/:id" element={<ProductDetails />} />
     </Route>
   )
 );
