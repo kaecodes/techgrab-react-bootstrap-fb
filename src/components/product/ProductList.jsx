@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BsFillGridFill } from "react-icons/bs";
-import { FaListAlt } from "react-icons/fa";
+import { FaListAlt, FaCogs } from "react-icons/fa";
 import Search from "../Search";
 import ProductItem from "./ProductItem";
 
@@ -10,8 +10,8 @@ const ProductList = ({ products }) => {
 
   return (
     <div className="container pt-2 mb-8">
-      <div className="d-flex justify-content-between">
-        <div className="d-flex gap-2 align-items-center">
+      <div className="d-flex flex-column flex-lg-row justify-content-between position-relative">
+        <div className="d-flex gap-2 align-items-center mb-2">
           <BsFillGridFill
             size={22}
             className="text-warning"
@@ -27,11 +27,11 @@ const ProductList = ({ products }) => {
           </p>
         </div>
         {/* Search Icon  */}
-        <div>
+        <div className="mb-2 w-50 w-lg-33">
           <Search value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
         {/* Sort Products */}
-        <div className="d-flex gap-2 justify-content-center align-items-center">
+        <div className="d-none d-lg-flex gap-2 justify-content-start align-items-center mb-2">
           <label>Sort By: </label>
           <select>
             <option value="latest">Latest</option>
@@ -40,6 +40,12 @@ const ProductList = ({ products }) => {
             <option value="a-z">A - Z</option>
             <option value="z-a">Z - A</option>
           </select>
+        </div>
+        <div className="d-block d-lg-none position-absolute end-0 top-25">
+          <div className="d-flex gap-2 text-warning align-items-center justify-content-center">
+            <FaCogs size={18} />
+            <strong>Show Filters</strong>
+          </div>
         </div>
       </div>
       <hr className="mb-3" />

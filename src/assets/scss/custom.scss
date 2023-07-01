@@ -97,5 +97,12 @@ $spacers: (
   8: $spacer * 5.5,
 ) !default;
 
+$position-values: (
+  0: 0,
+  25: 25%,
+  50: 50%,
+  100: 100%,
+) !default;
+
 // Import all of Bootstrap's CSS
 @import "~bootstrap/scss/bootstrap";
