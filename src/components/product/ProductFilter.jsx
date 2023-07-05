@@ -1,12 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectProducts } from "../../redux/features/productSlice";
 import { useState } from "react";
+import { FILTER_BY_CATEGORY } from "../../redux/features/filterSlice";
 
 const ProductFilter = () => {
   const products = useSelector(selectProducts);
   const [category, setCategory] = useState("All Categories");
   const [brand, setBrand] = useState("All Brands");
   const [price, setPrice] = useState(3000);
+
+  const dispatch = useDispatch();
 
   // Get all categories
   const allCategories = [
@@ -20,6 +23,11 @@ const ProductFilter = () => {
     ...new Set(products.map((product) => product.brand)),
   ];
 
+  const filterProducts = (cat) => {
+    setCategory(cat);
+    dispatch(FILTER_BY_CATEGORY({ products, category: cat }));
+  };
+
   return (
     <div className="container mt-5">
       <div>
@@ -30,17 +38,23 @@ const ProductFilter = () => {
               <button
                 key={index}
                 type="button"
-                className="border-0 bg-transparent text-start border-bottom py-1"
+                className={
+                  `${category}` === cat
+                    ? `border-0 border-start border-warning border-3 bg-transparent text-start pt-1 pb-0 ps-2 active`
+                    : `border-0 bg-transparent text-start pt-1 pb-0 ps-2`
+                }
+                onClick={() => filterProducts(cat)}
               >
                 &#8250; {cat}
+                <hr className="mt-2" />
               </button>
             );
           })}
         </div>
-        <h5 className="mt-3">Brands</h5>
+        <h5 className="mt-4">Brands</h5>
         <div>
           <select
-            className="w-75"
+            className="w-100 p-1"
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
           >
@@ -53,7 +67,7 @@ const ProductFilter = () => {
             })}
           </select>
         </div>
-        <h5 className="mt-3">Price</h5>
+        <h5 className="mt-4">Price</h5>
         <p className="mb-1">{`$${price}`}</p>
         <div>
           <input

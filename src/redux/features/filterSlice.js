@@ -48,10 +48,14 @@ const filterSlice = createSlice({
 
       state.filteredProducts = tempProducts;
     },
+    FILTER_BY_CATEGORY: (state, action) => {
+      console.log(action.payload);
+    },
   },
 });
 
-export const { FILTER_BY_SEARCH, SORT_PRODUCTS } = filterSlice.actions;
+export const { FILTER_BY_SEARCH, SORT_PRODUCTS, FILTER_BY_CATEGORY } =
+  filterSlice.actions;
 
 export const selectFilteredProducts = (state) => state.filter.filteredProducts;
 
