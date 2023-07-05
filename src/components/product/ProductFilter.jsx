@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectProducts } from "../../redux/features/productSlice";
-import { useState } from "react";
-import { FILTER_BY_CATEGORY } from "../../redux/features/filterSlice";
+import { useEffect, useState } from "react";
+import {
+  FILTER_BY_BRAND,
+  FILTER_BY_CATEGORY,
+} from "../../redux/features/filterSlice";
 
 const ProductFilter = () => {
   const products = useSelector(selectProducts);
@@ -23,6 +26,12 @@ const ProductFilter = () => {
     ...new Set(products.map((product) => product.brand)),
   ];
 
+  // Filter product based on selected brand
+  useEffect(() => {
+    dispatch(FILTER_BY_BRAND({ products, brand }));
+  }, [dispatch, products, brand]);
+
+  // Filter products based on selected category
   const filterProducts = (cat) => {
     setCategory(cat);
     dispatch(FILTER_BY_CATEGORY({ products, category: cat }));

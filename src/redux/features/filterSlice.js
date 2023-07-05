@@ -61,11 +61,26 @@ const filterSlice = createSlice({
       }
       state.filteredProducts = tempProducts;
     },
+    // Filter Products based on Brand
+    FILTER_BY_BRAND: (state, action) => {
+      const { brand, products } = action.payload;
+      let tempProducts = [];
+      if (brand === "All Brands") {
+        tempProducts = products;
+      } else {
+        tempProducts = products.filter((product) => product.brand === brand);
+      }
+      state.filteredProducts = tempProducts;
+    },
   },
 });
 
-export const { FILTER_BY_SEARCH, SORT_PRODUCTS, FILTER_BY_CATEGORY } =
-  filterSlice.actions;
+export const {
+  FILTER_BY_SEARCH,
+  SORT_PRODUCTS,
+  FILTER_BY_CATEGORY,
+  FILTER_BY_BRAND,
+} = filterSlice.actions;
 
 export const selectFilteredProducts = (state) => state.filter.filteredProducts;
 
