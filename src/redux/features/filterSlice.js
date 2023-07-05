@@ -48,8 +48,18 @@ const filterSlice = createSlice({
 
       state.filteredProducts = tempProducts;
     },
+    // Filter Products based on Category
     FILTER_BY_CATEGORY: (state, action) => {
-      console.log(action.payload);
+      const { category, products } = action.payload;
+      let tempProducts = [];
+      if (category === "All Categories") {
+        tempProducts = products;
+      } else {
+        tempProducts = products.filter(
+          (product) => product.category === category
+        );
+      }
+      state.filteredProducts = tempProducts;
     },
   },
 });
