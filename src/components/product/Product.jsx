@@ -3,6 +3,7 @@ import ProductFilter from "./ProductFilter";
 import ProductList from "./ProductList";
 import useFetchCollection from "../../customHooks/useFetchCollection";
 import {
+  GET_PRICE_RANGE,
   STORE_PRODUCTS,
   selectProducts,
 } from "../../redux/features/productSlice";
@@ -21,6 +22,12 @@ const Product = () => {
   useEffect(() => {
     dispatch(
       STORE_PRODUCTS({
+        products: data,
+      })
+    );
+
+    dispatch(
+      GET_PRICE_RANGE({
         products: data,
       })
     );

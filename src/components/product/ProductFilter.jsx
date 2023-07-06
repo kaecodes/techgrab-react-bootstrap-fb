@@ -1,9 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectProducts } from "../../redux/features/productSlice";
+import {
+  selectMaxPrice,
+  selectMinPrice,
+  selectProducts,
+} from "../../redux/features/productSlice";
 import { useEffect, useState } from "react";
 import {
   FILTER_BY_BRAND,
   FILTER_BY_CATEGORY,
+  FILTER_BY_PRICE,
 } from "../../redux/features/filterSlice";
 
 const ProductFilter = () => {
@@ -11,6 +16,8 @@ const ProductFilter = () => {
   const [category, setCategory] = useState("All Categories");
   const [brand, setBrand] = useState("All Brands");
   const [price, setPrice] = useState(3000);
+  const minPrice = useSelector(selectMinPrice);
+  const maxPrice = useSelector(selectMaxPrice);
 
   const dispatch = useDispatch();
 
@@ -26,10 +33,15 @@ const ProductFilter = () => {
     ...new Set(products.map((product) => product.brand)),
   ];
 
-  // Filter product based on selected brand
+  // Filter products based on selected brand
   useEffect(() => {
     dispatch(FILTER_BY_BRAND({ products, brand }));
   }, [dispatch, products, brand]);
+
+  // Filter products based on price
+  useEffect(() => {
+    dispatch(FILTER_BY_PRICE({ products, price }));
+  }, [dispatch, products, price]);
 
   // Filter products based on selected category
   const filterProducts = (cat) => {
@@ -83,8 +95,8 @@ const ProductFilter = () => {
             type="range"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            min={20}
-            max={300}
+            min={minPrice}
+            max={maxPrice}
           />
         </div>
         <button className="btn btn-primary mt-1">Clear Filters</button>
