@@ -49,6 +49,12 @@ const ProductFilter = () => {
     dispatch(FILTER_BY_CATEGORY({ products, category: cat }));
   };
 
+  const clearFilters = () => {
+    setCategory("All Categories");
+    setBrand("All Brands");
+    setPrice(maxPrice);
+  };
+
   return (
     <div className="container mt-5">
       <div>
@@ -99,7 +105,9 @@ const ProductFilter = () => {
             max={maxPrice}
           />
         </div>
-        <button className="btn btn-primary mt-1">Clear Filters</button>
+        <button className="btn btn-primary mt-1" onClick={clearFilters}>
+          Clear Filters
+        </button>
       </div>
     </div>
   );
