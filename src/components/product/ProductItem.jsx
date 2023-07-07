@@ -10,23 +10,31 @@ const ProductItem = ({ product, grid, id, name, imageURL, price, desc }) => {
     return text;
   };
 
+  const gridImage = {
+    width: "180px",
+    height: "180px",
+    objectFit: "contain",
+  };
+
+  const listImage = {
+    width: "200px",
+    height: "200px",
+    objectFit: "contain",
+  };
+
   return (
     <div
       className={grid ? "card p-2 shadow" : "card p-3 shadow d-flex flex-row"}
     >
       <div className="d-flex justify-content-center align-items-center">
         <Link to={`/product-details/${id}`}>
-          <img
-            src={imageURL}
-            alt={name}
-            style={{ width: "200px", height: "200px", objectFit: "contain" }}
-          />
+          <img src={imageURL} alt={name} style={grid ? gridImage : listImage} />
         </Link>
       </div>
       <div
         className={
           grid
-            ? "d-flex flex-column justify-content-center align-items-center p-2"
+            ? "d-flex flex-column justify-content-center align-items-center p-2 h-40"
             : "justify-content-start ms-4 p-2"
         }
       >

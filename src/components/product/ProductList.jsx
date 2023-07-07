@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BsFillGridFill } from "react-icons/bs";
-import { FaListAlt, FaCogs } from "react-icons/fa";
+import { FaListAlt } from "react-icons/fa";
 import Search from "../Search";
 import ProductItem from "./ProductItem";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,8 +29,8 @@ const ProductList = ({ products }) => {
   }, [dispatch, sort, products]);
 
   return (
-    <div className="container pt-2 mb-8">
-      <div className="d-flex flex-column flex-lg-row justify-content-between position-relative">
+    <div className="pt-2 mb-8">
+      <div className="d-flex flex-column flex-lg-row justify-content-between">
         <div className="d-flex gap-2 align-items-center mb-2">
           <BsFillGridFill
             size={22}
@@ -60,12 +60,6 @@ const ProductList = ({ products }) => {
             <option value="a-z">A - Z</option>
             <option value="z-a">Z - A</option>
           </select>
-        </div>
-        <div className="d-block d-lg-none position-absolute end-0 top-25">
-          <div className="d-flex gap-2 text-warning align-items-center justify-content-center">
-            <FaCogs size={18} />
-            <strong>Show Filters</strong>
-          </div>
         </div>
       </div>
       <hr className="mb-3" />
