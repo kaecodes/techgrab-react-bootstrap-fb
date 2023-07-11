@@ -1,7 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { ADD_TO_CART } from "../../redux/features/cartSlice";
 
 const ProductItem = ({ product, grid, id, name, imageURL, price, desc }) => {
+  const dispatch = useDispatch();
+
   const shortenText = (text, n) => {
     if (text.length > n) {
       const shortenedText = text.substring(0, n).concat("...");
@@ -20,6 +24,11 @@ const ProductItem = ({ product, grid, id, name, imageURL, price, desc }) => {
     width: "200px",
     height: "200px",
     objectFit: "contain",
+  };
+
+  // Add product to cart
+  const addToCart = (product) => {
+    dispatch(ADD_TO_CART(product));
   };
 
   return (
@@ -46,7 +55,10 @@ const ProductItem = ({ product, grid, id, name, imageURL, price, desc }) => {
           <p className="fs-4 fw-bold text-warning mb-1">{`$${price}`}</p>
           {!grid ? <p>{shortenText(desc, 200)}</p> : null}
         </div>
-        <button className={!grid ? "btn btn-primary" : "btn btn-primary w-100"}>
+        <button
+          className={!grid ? "btn btn-primary" : "btn btn-primary w-100"}
+          onClick={() => addToCart(product)}
+        >
           Add To Cart
         </button>
       </div>
