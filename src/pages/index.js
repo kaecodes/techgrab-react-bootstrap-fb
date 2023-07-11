@@ -7,3 +7,4 @@ export { default as Contact } from "../pages/Contact";
 export { default as Shop } from "../pages/Shop";
 export { default as Admin } from "../pages/Admin";
 export { default as ProductDetails } from "../components/product/ProductDetails";
+export { default as Cart } from "../pages/Cart";
