@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import spinnerImg from "../../assets/images/spinner.jpg";
 import { FaCogs } from "react-icons/fa";
+import logoImg from "../../assets/images/techgrablogoblue.png";
 
 const Product = () => {
   // Get data from products collection in database
@@ -55,7 +56,11 @@ const Product = () => {
       >
         <div className="offcanvas-header">
           <h5 className="offcanvas-title" id="offcanvasExampleLabel">
-            Tech Grab Logo
+            <img
+              src={logoImg}
+              alt="Tech Grab logo"
+              style={{ width: "150px" }}
+            />
           </h5>
           <button
             type="button"
