@@ -42,13 +42,32 @@ const Product = () => {
   return (
     <section className="d-flex gap-4 flex-column flex-md-row position-relative mx-auto px-5">
       <aside
-        className={
-          showFilters
-            ? "position-absolute start-0 top-0 w-75 h-100vh bg-success z-3"
-            : "d-none d-lg-block w-md-25"
-        }
+        className="offcanvas-lg offcanvas-start w-50 w-lg-25 mt-lg-5"
+        // className={
+        //   showFilters
+        //     ? "offcanvas offcanvas-start bg-success"
+        //     : // ? "position-absolute start-0 top-0 w-50 h-100 bg-success z-3 p-4"
+        //       "offcanvas-lg w-lg-25 mt-lg-5"
+        // }
+        tabIndex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
       >
-        {isLoading ? null : <ProductFilter />}
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title" id="offcanvasExampleLabel">
+            Tech Grab Logo
+          </h5>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="offcanvas"
+            data-bs-target="#offcanvasExample"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div className="offcanvas-body">
+          {isLoading ? null : <ProductFilter />}
+        </div>
       </aside>
       <div className="w-100 w-lg-75">
         {isLoading ? (
@@ -62,10 +81,16 @@ const Product = () => {
           <ProductList products={products} />
         )}
       </div>
-      <div className="d-flex d-lg-none position-absolute end-10 mt-4">
-        <div className="" onClick={toggleFilters}>
+      <div className="d-flex d-lg-none position-absolute end-5 mt-4">
+        <div
+          className="d-flex gap-1 align-items-center"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasExample"
+          aria-controls="offcanvasExample"
+          onClick={toggleFilters}
+        >
           <FaCogs size={18} className="text-warning" />
-          <strong className="text-primary">Show Filters</strong>
+          <strong className="text-primary">Filters</strong>
         </div>
       </div>
     </section>

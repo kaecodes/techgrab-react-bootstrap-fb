@@ -106,5 +106,7 @@ $position-values: (
   100: 100%,
 ) !default;
 
+$enable-negative-margins: true;
+
 // Import all of Bootstrap's CSS
 @import "~bootstrap/scss/bootstrap";

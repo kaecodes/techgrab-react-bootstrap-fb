@@ -56,7 +56,7 @@ const ProductFilter = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container">
       <div>
         <h5>Categories</h5>
         <div className="d-flex flex-column">
