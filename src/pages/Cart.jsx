@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  ADD_TO_CART,
   selectCartItems,
   selectCartTotalAmount,
   selectCartTotalQuantity,
@@ -11,6 +12,16 @@ const Cart = () => {
   const cartItems = useSelector(selectCartItems);
   const cartTotalAmount = useSelector(selectCartTotalAmount);
   const cartTotalQuantity = useSelector(selectCartTotalQuantity);
+
+  const dispatch = useDispatch();
+
+  // Increase quantity in cart
+  const increaseCart = (cart) => {
+    dispatch(ADD_TO_CART(cart));
+  };
+
+  // Decrease quantity in cart
+  const decreaseCart = () => {};
 
   return (
     <section>
