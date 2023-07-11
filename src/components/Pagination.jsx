@@ -46,9 +46,11 @@ const Pagination = ({
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
-      <ul className="navbar-nav d-flex flex-row gap-3">
+      <ul className="navbar-nav d-flex flex-row">
         <li
-          className={currentPage === pageNumbers[0] ? "d-none" : null}
+          className={
+            currentPage === pageNumbers[0] ? "d-none" : "border px-3 py-1"
+          }
           onClick={paginatePrev}
         >
           Prev
@@ -56,7 +58,15 @@ const Pagination = ({
         {pageNumbers.map((number) => {
           if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
             return (
-              <li key={number} onClick={() => paginate(number)}>
+              <li
+                key={number}
+                className={
+                  currentPage === number
+                    ? "border px-3 py-1 bg-success text-light border-success"
+                    : "border px-3 py-1"
+                }
+                onClick={() => paginate(number)}
+              >
                 {number}
               </li>
             );
@@ -66,15 +76,15 @@ const Pagination = ({
           className={
             currentPage === pageNumbers[pageNumbers.length - 1]
               ? "d-none"
-              : null
+              : "border px-3 py-1"
           }
           onClick={paginateNext}
         >
           Next
         </li>
       </ul>
-      <p>
-        <strong>{`Page ${currentPage}`}</strong>
+      <p className="mt-2">
+        <strong className="text-success">{`Page ${currentPage}`}</strong>
         <span>{` of `}</span>
         <strong>{`${Math.ceil(totalPages)}`}</strong>
       </p>
