@@ -70,6 +70,8 @@ const ProductFilter = () => {
                     ? `border-0 border-start border-warning border-3 bg-transparent text-start pt-1 pb-0 ps-2 active`
                     : `border-0 bg-transparent text-start pt-1 pb-0 ps-2`
                 }
+                data-bs-dismiss="offcanvas"
+                data-bs-target="#offcanvasFilters"
                 onClick={() => filterProducts(cat)}
               >
                 &#8250; {cat}
@@ -105,7 +107,12 @@ const ProductFilter = () => {
             max={maxPrice}
           />
         </div>
-        <button className="btn btn-primary mt-1" onClick={clearFilters}>
+        <button
+          className="btn btn-primary mt-1"
+          onClick={clearFilters}
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasFilters"
+        >
           Clear Filters
         </button>
       </div>

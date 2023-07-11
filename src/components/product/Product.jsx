@@ -17,7 +17,6 @@ const Product = () => {
   const { data, isLoading } = useFetchCollection("products");
   // Get products from redux store
   const products = useSelector(selectProducts);
-  const [showFilters, setShowFilters] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -36,26 +35,16 @@ const Product = () => {
     );
   }, [dispatch, data]);
 
-  const toggleFilters = () => {
-    setShowFilters(!showFilters);
-  };
-
   return (
     <section className="d-flex gap-4 flex-column flex-md-row position-relative mx-auto px-5">
       <aside
         className="offcanvas-lg offcanvas-start w-50 w-lg-25 mt-lg-5"
-        // className={
-        //   showFilters
-        //     ? "offcanvas offcanvas-start bg-success"
-        //     : // ? "position-absolute start-0 top-0 w-50 h-100 bg-success z-3 p-4"
-        //       "offcanvas-lg w-lg-25 mt-lg-5"
-        // }
         tabIndex="-1"
-        id="offcanvasExample"
-        aria-labelledby="offcanvasExampleLabel"
+        id="offcanvasFilters"
+        aria-labelledby="offcanvasFiltersLabel"
       >
         <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="offcanvasExampleLabel">
+          <h5 className="offcanvas-title" id="offcanvasFiltersLabel">
             <img
               src={logoImg}
               alt="Tech Grab logo"
@@ -66,7 +55,7 @@ const Product = () => {
             type="button"
             className="btn-close"
             data-bs-dismiss="offcanvas"
-            data-bs-target="#offcanvasExample"
+            data-bs-target="#offcanvasFilters"
             aria-label="Close"
           ></button>
         </div>
@@ -90,9 +79,8 @@ const Product = () => {
         <div
           className="d-flex gap-1 align-items-center"
           data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasExample"
-          aria-controls="offcanvasExample"
-          onClick={toggleFilters}
+          data-bs-target="#offcanvasFilters"
+          aria-controls="offcanvasFilters"
         >
           <FaCogs size={18} className="text-warning" />
           <strong className="text-primary">Filters</strong>
