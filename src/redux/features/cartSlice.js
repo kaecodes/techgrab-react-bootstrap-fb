@@ -36,10 +36,34 @@ const cartSlice = createSlice({
       // Save cart to local storage
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
+    DECREASE_CART: (state, action) => {
+      // Find if the product exists in cartItems
+      const productIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      if (state.cartItems[productIndex].cartQuantity > 1) {
+        // If product exists and quantity is greater than 1, then decrease quantity
+        state.cartItems[productIndex].cartQuantity -= 1;
+        toast.success(`${action.payload.name} decreased by one.`);
+      } else if (state.cartItems[productIndex].cartQuantity === 1) {
+        // If quanitty is one, remove item and create new array to show updated cart
+        const newCartItem = state.cartItems.filter(
+          (item) => item.id !== action.payload.id
+        );
+        // Set new state of cartItems to newCartItem
+        state.cartItems = newCartItem;
+        toast.success(`${action.payload.name} removed from cart!`, {
+          position: "top-left",
+        });
+      }
+      // Save cart to local storage
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
   },
 });
 
-export const { ADD_TO_CART } = cartSlice.actions;
+export const { ADD_TO_CART, DECREASE_CART } = cartSlice.actions;
 
 export const selectCartItems = (state) => state.cart.cartItems;
 export const selectCartTotalQuantity = (state) => state.cart.cartTotalQuantity;

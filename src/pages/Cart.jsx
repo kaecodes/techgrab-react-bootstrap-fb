@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   ADD_TO_CART,
+  DECREASE_CART,
   selectCartItems,
   selectCartTotalAmount,
   selectCartTotalQuantity,
@@ -21,7 +22,9 @@ const Cart = () => {
   };
 
   // Decrease quantity in cart
-  const decreaseCart = () => {};
+  const decreaseCart = (cart) => {
+    dispatch(DECREASE_CART(cart));
+  };
 
   return (
     <section>
@@ -69,7 +72,7 @@ const Cart = () => {
                         <div className="d-flex">
                           <button
                             className="btn bg-light px-3 py-1"
-                            onClick={() => decreaseCart()}
+                            onClick={() => decreaseCart(cart)}
                           >
                             -
                           </button>
