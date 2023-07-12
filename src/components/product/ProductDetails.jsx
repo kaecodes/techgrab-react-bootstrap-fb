@@ -62,23 +62,27 @@ const ProductDetails = () => {
   return (
     <section>
       <div className="container mb-8">
-        <h3 className="text-center text-primary py-3">Product Details</h3>
-        <Link to="/shop">&larr; Back to Shop</Link>
+        <h3 className="text-center text-primary pt-3 mb-0 pb-2">
+          Product Details
+        </h3>
+        <div className="text-center mb-5">
+          <Link to="/shop">&larr; Back to Shop</Link>
+        </div>
         {product === null ? (
           <img src={spinnerImg} alt="Loading..." style={{ width: "100px" }} />
         ) : (
-          <>
-            <div>
+          <div className="d-flex flex-column gap-4 flex-lg-row card shadow p-5">
+            <div className="d-flex justify-content-center align-items-center px-2">
               <img
                 src={product.imageURL}
                 className="img-fluid"
                 alt={product.name}
               />
             </div>
-            <div>
-              <h3>{product.name}</h3>
-              <p>{`$${product.price}`}</p>
-              <p>{product.desc}</p>
+            <div className="d-flex flex-column justify-content-center align-items-center align-items-lg-start px-2">
+              <h3 className="py-2">{product.name}</h3>
+              <p className="fs-3 text-warning fw-bold">{`$${product.price}`}</p>
+              <p className="text-center text-lg-start">{product.desc}</p>
               <p>
                 <strong>SKU: </strong>
                 {product.id}
@@ -90,20 +94,23 @@ const ProductDetails = () => {
               <div>
                 {/* Check to see if an item has been added to cart */}
                 {isCartAdded < 0 ? null : (
-                  <>
+                  <div className="d-flex justify-content-center align-items-center mb-3">
                     <button
-                      className="btn"
+                      className="btn bg-light px-3 py-1"
                       onClick={() => decreaseCart(product)}
                     >
                       -
                     </button>
-                    <p>
+                    <p className="px-3 my-auto">
                       <strong>{cart.cartQuantity}</strong>
                     </p>
-                    <button className="btn" onClick={() => addToCart(product)}>
+                    <button
+                      className="btn bg-light px-3 py-1"
+                      onClick={() => addToCart(product)}
+                    >
                       +
                     </button>
-                  </>
+                  </div>
                 )}
               </div>
               <button
@@ -113,7 +120,7 @@ const ProductDetails = () => {
                 Add To Cart
               </button>
             </div>
-          </>
+          </div>
         )}
       </div>
     </section>
