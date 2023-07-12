@@ -6,25 +6,17 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   REMOVE_ACTIVE_USER,
   SET_ACTIVE_USER,
 } from "../redux/features/authSlice";
 import ShowOnLogin, { ShowOnLogout } from "./HiddenLink";
 import { AdminOnlyLink } from "../components/AdminOnlyRoute";
-
-// Reusable variables
-const cart = (
-  <Link to="/cart" className="nav-link text-light">
-    <FaShoppingCart className="d-inline" />
-    <p className="d-inline">
-      <sup>
-        <small>10</small>
-      </sup>
-    </p>
-  </Link>
-);
+import {
+  CALCULATE_TOTAL_QUANTITY,
+  selectCartTotalQuantity,
+} from "../redux/features/cartSlice";
 
 const login = (
   <Link
@@ -39,6 +31,11 @@ const Header = () => {
   const [displayName, setDisplayName] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const cartTotalQuantity = useSelector(selectCartTotalQuantity);
+
+  useEffect(() => {
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  }, []);
 
   // Get the currently signed in user
   useEffect(() => {
@@ -77,6 +74,18 @@ const Header = () => {
         toast.error(error.message);
       });
   };
+
+  // Reusable variables
+  const cart = (
+    <Link to="/cart" className="nav-link text-light">
+      <FaShoppingCart className="d-inline" />
+      <p className="d-inline">
+        <sup>
+          <small>{cartTotalQuantity}</small>
+        </sup>
+      </p>
+    </Link>
+  );
 
   return (
     <header className="sticky-top">

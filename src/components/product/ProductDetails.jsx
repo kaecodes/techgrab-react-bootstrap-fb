@@ -4,10 +4,27 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { toast } from "react-toastify";
 import spinnerImg from "../../assets/images/spinner.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ADD_TO_CART,
+  CALCULATE_TOTAL_QUANTITY,
+  DECREASE_CART,
+  selectCartItems,
+} from "../../redux/features/cartSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const cartItems = useSelector(selectCartItems);
+
+  const cart = cartItems.find((cart) => cart.id === id);
+
+  // Check to see if an item has been added to cart
+  const isCartAdded = cartItems.findIndex((cart) => {
+    return cart.id === id;
+  });
+
+  const dispatch = useDispatch();
 
   // Get a single product from firebase
   const getProduct = async () => {
@@ -32,19 +49,31 @@ const ProductDetails = () => {
     getProduct();
   }, []);
 
+  const addToCart = (product) => {
+    dispatch(ADD_TO_CART(product));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  };
+
+  const decreaseCart = (product) => {
+    dispatch(DECREASE_CART(product));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  };
+
   return (
     <section>
       <div className="container mb-8">
-        <h2>Product Details</h2>
-        <Link to="/shop">
-          <button className="btn btn-primary">&larr; Back to Shop</button>
-        </Link>
+        <h3 className="text-center text-primary py-3">Product Details</h3>
+        <Link to="/shop">&larr; Back to Shop</Link>
         {product === null ? (
           <img src={spinnerImg} alt="Loading..." style={{ width: "100px" }} />
         ) : (
           <>
             <div>
-              <img src={product.imageURL} alt={product.name} />
+              <img
+                src={product.imageURL}
+                className="img-fluid"
+                alt={product.name}
+              />
             </div>
             <div>
               <h3>{product.name}</h3>
@@ -59,13 +88,28 @@ const ProductDetails = () => {
                 {product.brand}
               </p>
               <div>
-                <button className="btn">-</button>
-                <p>
-                  <strong>1</strong>
-                </p>
-                <button className="btn">+</button>
+                {/* Check to see if an item has been added to cart */}
+                {isCartAdded < 0 ? null : (
+                  <>
+                    <button
+                      className="btn"
+                      onClick={() => decreaseCart(product)}
+                    >
+                      -
+                    </button>
+                    <p>
+                      <strong>{cart.cartQuantity}</strong>
+                    </p>
+                    <button className="btn" onClick={() => addToCart(product)}>
+                      +
+                    </button>
+                  </>
+                )}
               </div>
-              <button className="btn btn-warning text-light">
+              <button
+                className="btn btn-warning text-light"
+                onClick={() => addToCart(product)}
+              >
                 Add To Cart
               </button>
             </div>
