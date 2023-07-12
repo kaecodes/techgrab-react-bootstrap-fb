@@ -146,7 +146,7 @@ const Header = () => {
             <div>
               <ul className="navbar-nav fs-4 fs-xl-1">
                 <AdminOnlyLink>
-                  <li className="nav-item">
+                  <li className="nav-item" data-bs-dismiss="offcanvas">
                     <Link
                       to="/admin/home"
                       className="nav-link text-warning text-decoration-none"
@@ -155,7 +155,7 @@ const Header = () => {
                     </Link>
                   </li>
                 </AdminOnlyLink>
-                <li className="nav-item">
+                <li className="nav-item" data-bs-dismiss="offcanvas">
                   <NavLink
                     to="/"
                     className="nav-link text-secondary text-decoration-none"

@@ -8,11 +8,11 @@ import Navbar from "../components/admin/Navbar";
 
 const Admin = () => {
   return (
-    <section className="d-flex flex-column flex-md-row">
-      <div className="w-md-25 border-end">
+    <section className="d-flex flex-column flex-lg-row">
+      <div className="w-lg-25 border-end">
         <Navbar />
       </div>
-      <div className="w-md-75 min-vh-md-100">
+      <div className="w-lg-75 min-vh-lg-100">
         <Routes>
           <Route path="home" element={<Home />} />
           <Route path="view-products" element={<ViewProducts />} />
