@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   ADD_TO_CART,
   DECREASE_CART,
+  REMOVE_FROM_CART,
   selectCartItems,
   selectCartTotalAmount,
   selectCartTotalQuantity,
@@ -24,6 +25,11 @@ const Cart = () => {
   // Decrease quantity in cart
   const decreaseCart = (cart) => {
     dispatch(DECREASE_CART(cart));
+  };
+
+  // Remove item from cart
+  const removeFromCart = (cart) => {
+    dispatch(REMOVE_FROM_CART(cart));
   };
 
   return (
@@ -91,7 +97,11 @@ const Cart = () => {
                         price * cartQuantity
                       ).toFixed(2)}`}</td>
                       <td className="text-center align-middle">
-                        <FaTrashAlt size={18} color="red" />
+                        <FaTrashAlt
+                          size={18}
+                          color="red"
+                          onClick={() => removeFromCart(cart)}
+                        />
                       </td>
                     </tr>
                   );
