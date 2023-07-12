@@ -82,6 +82,18 @@ const cartSlice = createSlice({
       // Update local storage
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
+    CALCULATE_TOTAL: (state, action) => {
+      const array = [];
+      state.cartItems.map((item) => {
+        const { price, cartQuantity } = item;
+        const cartItemAmount = price * cartQuantity;
+        return array.push(cartItemAmount);
+      });
+      const totalAmount = array.reduce((a, b) => {
+        return a + b;
+      }, 0);
+      state.cartTotalAmount = totalAmount;
+    },
   },
 });
 
