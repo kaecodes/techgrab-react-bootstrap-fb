@@ -29,7 +29,7 @@ const cartSlice = createSlice({
         // Item does not exist in cart so add to cart
         const tempProduct = { ...action.payload, cartQuantity: 1 };
         state.cartItems.push(tempProduct);
-        toast.success(`${action.payload.name} added to cart successfully!`, {
+        toast.info(`${action.payload.name} added to cart successfully!`, {
           position: "top-left",
         });
       }
@@ -45,7 +45,7 @@ const cartSlice = createSlice({
       if (state.cartItems[productIndex].cartQuantity > 1) {
         // If product exists and quantity is greater than 1, then decrease quantity
         state.cartItems[productIndex].cartQuantity -= 1;
-        toast.success(`${action.payload.name} decreased by one.`);
+        toast.info(`${action.payload.name} decreased by one.`);
       } else if (state.cartItems[productIndex].cartQuantity === 1) {
         // If quanitty is one, remove item and create new array to show updated cart
         const newCartItem = state.cartItems.filter(
@@ -53,7 +53,7 @@ const cartSlice = createSlice({
         );
         // Set new state of cartItems to newCartItem
         state.cartItems = newCartItem;
-        toast.success(`${action.payload.name} removed from cart!`, {
+        toast.info(`${action.payload.name} removed from cart!`, {
           position: "top-left",
         });
       }
@@ -66,7 +66,16 @@ const cartSlice = createSlice({
         (item) => item.id !== action.payload.id
       );
       state.cartItems = newCartItem;
-      toast.success(`${action.payload.name} removed from cart!`, {
+      toast.info(`${action.payload.name} removed from cart!`, {
+        position: "top-left",
+      });
+
+      // Update local storage
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    CLEAR_CART: (state, action) => {
+      state.cartItems = [];
+      toast.info(`All products removed from cart!`, {
         position: "top-left",
       });
 
@@ -76,7 +85,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { ADD_TO_CART, DECREASE_CART, REMOVE_FROM_CART } =
+export const { ADD_TO_CART, DECREASE_CART, REMOVE_FROM_CART, CLEAR_CART } =
   cartSlice.actions;
 
 export const selectCartItems = (state) => state.cart.cartItems;

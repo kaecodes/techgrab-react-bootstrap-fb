@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   ADD_TO_CART,
+  CLEAR_CART,
   DECREASE_CART,
   REMOVE_FROM_CART,
   selectCartItems,
@@ -30,6 +31,11 @@ const Cart = () => {
   // Remove item from cart
   const removeFromCart = (cart) => {
     dispatch(REMOVE_FROM_CART(cart));
+  };
+
+  // Clear cart
+  const clearCart = () => {
+    dispatch(CLEAR_CART());
   };
 
   return (
@@ -110,7 +116,10 @@ const Cart = () => {
             </table>
             <div className="d-flex justify-content-between">
               <div className="w-50">
-                <button className="btn btn-warning text-light">
+                <button
+                  className="btn btn-warning text-light"
+                  onClick={() => clearCart()}
+                >
                   Clear Cart
                 </button>
               </div>
