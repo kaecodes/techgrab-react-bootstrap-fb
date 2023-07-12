@@ -82,11 +82,30 @@ const cartSlice = createSlice({
       // Update local storage
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
+    CALCULATE_TOTAL: (state, action) => {
+      const arr = [];
+      state.cartItems.map((item) => {
+        const { price, cartQuantity } = item;
+        // Find the total amount of each item
+        const cartItemAmount = price * cartQuantity;
+        return arr.push(cartItemAmount);
+      });
+      const totalAmount = arr.reduce((a, b) => {
+        return a + b;
+      });
+      // Save total amount to state of cart total amount
+      state.cartTotalAmount = totalAmount;
+    },
   },
 });
 
-export const { ADD_TO_CART, DECREASE_CART, REMOVE_FROM_CART, CLEAR_CART } =
-  cartSlice.actions;
+export const {
+  ADD_TO_CART,
+  DECREASE_CART,
+  REMOVE_FROM_CART,
+  CLEAR_CART,
+  CALCULATE_TOTAL,
+} = cartSlice.actions;
 
 export const selectCartItems = (state) => state.cart.cartItems;
 export const selectCartTotalQuantity = (state) => state.cart.cartTotalQuantity;

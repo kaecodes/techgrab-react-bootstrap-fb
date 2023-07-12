@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   ADD_TO_CART,
+  CALCULATE_TOTAL,
   CLEAR_CART,
   DECREASE_CART,
   REMOVE_FROM_CART,
@@ -10,6 +11,7 @@ import {
 } from "../redux/features/cartSlice";
 import { Link } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
+import { useEffect } from "react";
 
 const Cart = () => {
   const cartItems = useSelector(selectCartItems);
@@ -37,6 +39,11 @@ const Cart = () => {
   const clearCart = () => {
     dispatch(CLEAR_CART());
   };
+
+  // Calculate total
+  useEffect(() => {
+    dispatch(CALCULATE_TOTAL());
+  }, [dispatch, cartItems]);
 
   return (
     <section className="mb-5 pb-5">
