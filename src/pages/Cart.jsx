@@ -137,9 +137,7 @@ const Cart = () => {
                   <Link to="/shop">&larr; Continue Shopping</Link>
                 </div>
                 <div className="card shadow p-3">
-                  <p>
-                    <strong>{`Cart items(s): ${cartTotalQuantity}`}</strong>
-                  </p>
+                  <h6>{`Cart items(s): ${cartTotalQuantity}`}</h6>
                   <div className="d-flex justify-content-between align-items-center">
                     <h5>Total: </h5>
                     <h3 className="text-warning fw-bold">{`$${cartTotalAmount.toFixed(
