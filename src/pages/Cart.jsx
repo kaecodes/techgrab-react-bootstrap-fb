@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   ADD_TO_CART,
   CALCULATE_TOTAL,
+  CALCULATE_TOTAL_QUANTITY,
   CLEAR_CART,
   DECREASE_CART,
   REMOVE_FROM_CART,
@@ -43,6 +44,7 @@ const Cart = () => {
   // Calculate total
   useEffect(() => {
     dispatch(CALCULATE_TOTAL());
+    dispatch(CALCULATE_TOTAL_QUANTITY());
   }, [dispatch, cartItems]);
 
   return (
