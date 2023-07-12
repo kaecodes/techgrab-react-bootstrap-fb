@@ -39,9 +39,9 @@ const Cart = () => {
   };
 
   return (
-    <section>
+    <section className="mb-5 pb-5">
       <div className="container-lg overflow-x-auto">
-        <h3>Shopping Cart</h3>
+        <h3 className="text-center text-primary py-3">Shopping Cart</h3>
         {cartItems.length === 0 ? (
           <>
             <p>Your cart is currently empty.</p>
@@ -52,7 +52,7 @@ const Cart = () => {
           </>
         ) : (
           <>
-            <table className="table">
+            <table className="table table-secondary table-striped">
               <thead>
                 <tr>
                   <th className="text-center">Serial No.</th>
