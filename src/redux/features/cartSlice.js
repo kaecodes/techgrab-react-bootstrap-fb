@@ -82,20 +82,6 @@ const cartSlice = createSlice({
       // Update local storage
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
-    CALCULATE_TOTAL: (state, action) => {
-      const arr = [];
-      state.cartItems.map((item) => {
-        const { price, cartQuantity } = item;
-        // Find the total amount of each item
-        const cartItemAmount = price * cartQuantity;
-        return arr.push(cartItemAmount);
-      });
-      const totalAmount = arr.reduce((a, b) => {
-        return a + b;
-      }, 0);
-      // Save total amount to state of cart total amount
-      state.cartTotalAmount = totalAmount;
-    },
   },
 });
 
