@@ -92,7 +92,7 @@ const cartSlice = createSlice({
       });
       const totalAmount = arr.reduce((a, b) => {
         return a + b;
-      });
+      }, 0);
       // Save total amount to state of cart total amount
       state.cartTotalAmount = totalAmount;
     },

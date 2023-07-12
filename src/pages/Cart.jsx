@@ -51,9 +51,9 @@ const Cart = () => {
         <h3 className="text-center text-primary py-3">Shopping Cart</h3>
         {cartItems.length === 0 ? (
           <>
-            <p>Your cart is currently empty.</p>
+            <p className="text-center">Your cart is currently empty.</p>
             <br />
-            <div>
+            <div className="text-center">
               <Link to="/shop">&larr; Continue Shopping</Link>
             </div>
           </>
