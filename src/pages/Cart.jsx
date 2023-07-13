@@ -6,20 +6,24 @@ import {
   CLEAR_CART,
   DECREASE_CART,
   REMOVE_FROM_CART,
+  SAVE_URL,
   selectCartItems,
   selectCartTotalAmount,
   selectCartTotalQuantity,
 } from "../redux/features/cartSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 import { useEffect } from "react";
+import { selectIsLoggedIn } from "../redux/features/authSlice";
 
 const Cart = () => {
   const cartItems = useSelector(selectCartItems);
   const cartTotalAmount = useSelector(selectCartTotalAmount);
   const cartTotalQuantity = useSelector(selectCartTotalQuantity);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Increase quantity in cart
   const increaseCart = (cart) => {
@@ -46,6 +50,19 @@ const Cart = () => {
     dispatch(CALCULATE_TOTAL());
     dispatch(CALCULATE_TOTAL_QUANTITY());
   }, [dispatch, cartItems]);
+
+  // Get the url of current page
+  const url = window.location.href;
+
+  // Redirect to login page if user not logged in tries to check out
+  const checkout = () => {
+    if (isLoggedIn) {
+      navigate("/checkout-details");
+    } else {
+      dispatch(SAVE_URL(url));
+      navigate("/login");
+    }
+  };
 
   return (
     <section className="mb-5 pb-5">
@@ -148,7 +165,9 @@ const Cart = () => {
                     Taxes and shipping have already been calculated and
                     included.
                   </p>
-                  <button className="btn btn-primary">Checkout</button>
+                  <button className="btn btn-primary" onClick={checkout}>
+                    Checkout
+                  </button>
                 </div>
               </div>
             </div>
