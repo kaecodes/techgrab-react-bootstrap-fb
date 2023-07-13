@@ -49,6 +49,7 @@ const Cart = () => {
   useEffect(() => {
     dispatch(CALCULATE_TOTAL());
     dispatch(CALCULATE_TOTAL_QUANTITY());
+    dispatch(SAVE_URL("")); // Makes sure url is empty and not save in state
   }, [dispatch, cartItems]);
 
   // Get the url of current page
