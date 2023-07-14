@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { CountryDropdown } from "react-country-region-selector";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  SAVE_BILLING_ADDRESS,
+  SAVE_SHIPPING_ADDRESS,
+} from "../../redux/features/checkoutSlice";
+import { useNavigate } from "react-router-dom";
 
 const initialAddressState = {
   name: "",
@@ -20,6 +26,9 @@ const CheckoutDetails = () => {
     ...initialAddressState,
   });
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleShipping = (e) => {
     const { name, value } = e.target;
     setShippingAddress({
@@ -38,7 +47,9 @@ const CheckoutDetails = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(shippingAddress, billingAddress);
+    dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
+    dispatch(SAVE_BILLING_ADDRESS(billingAddress));
+    navigate("/checkout");
   };
 
   return (

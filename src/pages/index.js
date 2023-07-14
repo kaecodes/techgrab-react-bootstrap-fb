@@ -9,3 +9,4 @@ export { default as Admin } from "../pages/Admin";
 export { default as ProductDetails } from "../components/product/ProductDetails";
 export { default as Cart } from "../pages/Cart";
 export { default as CheckoutDetails } from "../pages/checkout/CheckoutDetails";
+export { default as Checkout } from "../pages/checkout/Checkout";

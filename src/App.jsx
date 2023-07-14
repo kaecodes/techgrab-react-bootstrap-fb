@@ -18,6 +18,7 @@ import {
   Admin,
   ProductDetails,
   Cart,
+  Checkout,
 } from "./pages/index";
 import AdminOnlyRoute from "./components/AdminOnlyRoute";
 import CheckoutDetails from "./pages/checkout/CheckoutDetails";
@@ -43,6 +44,7 @@ const router = createBrowserRouter(
       <Route path="/product-details/:id" element={<ProductDetails />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout-details" element={<CheckoutDetails />} />
+      <Route path="/checkout" element={<Checkout />} />
     </Route>
   )
 );
