@@ -6,6 +6,7 @@ import {
   SAVE_SHIPPING_ADDRESS,
 } from "../../redux/features/checkoutSlice";
 import { useNavigate } from "react-router-dom";
+import CheckoutSummary from "../../components/CheckoutSummary";
 
 const initialAddressState = {
   name: "",
@@ -54,17 +55,17 @@ const CheckoutDetails = () => {
 
   return (
     <section className="mb-5 pb-5">
-      <div className="container">
-        <h3 className="text-center text-primary py-3">Checkout Details</h3>
-        <form onSubmit={handleSubmit}>
+      <h3 className="text-center text-primary py-3">Checkout Details</h3>
+      <div className="container-md d-lg-flex gap-4">
+        <form onSubmit={handleSubmit} className="w-lg-50">
           {/* Shipping Address */}
           <div className="card p-3 mb-3 shadow">
-            <h4>Shipping Address</h4>
+            <h4 className="fw-normal">Shipping Address</h4>
             <label className="py-1">Recipient Name:</label>
             <input
               type="text"
               placeholder="Recipient Name"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="name"
               value={shippingAddress.name}
@@ -74,7 +75,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="Address Line 1"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="line1"
               value={shippingAddress.line1}
@@ -84,7 +85,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="Address Line 2"
-              className="mb-2"
+              className="mb-2 p-1"
               name="line2"
               value={shippingAddress.line2}
               onChange={(e) => handleShipping(e)}
@@ -93,7 +94,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="City"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="city"
               value={shippingAddress.city}
@@ -103,7 +104,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="State"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="state"
               value={shippingAddress.state}
@@ -113,7 +114,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="Postal Code"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="postal_code"
               value={shippingAddress.postal_code}
@@ -122,7 +123,7 @@ const CheckoutDetails = () => {
             <label className="py-1">Country:</label>
             <CountryDropdown
               valueType="short"
-              className="mb-2 p-1"
+              className="mb-2 p-2"
               value={shippingAddress.country}
               onChange={(val) =>
                 handleShipping({
@@ -137,7 +138,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="Phone"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="phone"
               value={shippingAddress.phone}
@@ -145,13 +146,13 @@ const CheckoutDetails = () => {
             />
           </div>
           {/* Billing Addres */}
-          <div className="card p-3 shadow">
-            <h4>Billing Address</h4>
+          <div className="card p-3 mb-3 shadow">
+            <h4 className="fw-normal">Billing Address</h4>
             <label className="py-1">Name:</label>
             <input
               type="text"
               placeholder="Name"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="name"
               value={billingAddress.name}
@@ -161,7 +162,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="Address Line 1"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="line1"
               value={billingAddress.line1}
@@ -171,7 +172,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="Address Line 2"
-              className="mb-2"
+              className="mb-2 p-1"
               name="line2"
               value={billingAddress.line2}
               onChange={(e) => handleBilling(e)}
@@ -180,7 +181,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="City"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="city"
               value={billingAddress.city}
@@ -190,7 +191,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="State"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="state"
               value={billingAddress.state}
@@ -200,7 +201,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="Postal Code"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="postal_code"
               value={billingAddress.postal_code}
@@ -209,7 +210,7 @@ const CheckoutDetails = () => {
             <label className="py-1">Country:</label>
             <CountryDropdown
               valueType="short"
-              className="mb-2 p-1"
+              className="mb-2 p-2"
               value={billingAddress.country}
               onChange={(val) =>
                 handleShipping({
@@ -224,7 +225,7 @@ const CheckoutDetails = () => {
             <input
               type="text"
               placeholder="Phone"
-              className="mb-2"
+              className="mb-2 p-1"
               required
               name="phone"
               value={billingAddress.phone}
@@ -235,6 +236,11 @@ const CheckoutDetails = () => {
             </button>
           </div>
         </form>
+        <div className="w-lg-50">
+          <div className="card p-3 shadow">
+            <CheckoutSummary />
+          </div>
+        </div>
       </div>
     </section>
   );
