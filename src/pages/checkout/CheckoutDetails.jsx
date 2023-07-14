@@ -20,11 +20,26 @@ const CheckoutDetails = () => {
     ...initialAddressState,
   });
 
-  const handleShipping = () => {};
+  const handleShipping = (e) => {
+    const { name, value } = e.target;
+    setShippingAddress({
+      ...shippingAddress,
+      [name]: value,
+    });
+  };
 
-  const handleBilling = () => {};
+  const handleBilling = (e) => {
+    const { name, value } = e.target;
+    setBillingAddress({
+      ...billingAddress,
+      [name]: value,
+    });
+  };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(shippingAddress, billingAddress);
+  };
 
   return (
     <section className="mb-5 pb-5">
