@@ -16,7 +16,7 @@ import {
 import { toast } from "react-toastify";
 import CheckoutForm from "../../components/CheckoutForm";
 
-const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PK}`);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
 const Checkout = () => {
   const [clientSecret, setClientSecret] = useState("");

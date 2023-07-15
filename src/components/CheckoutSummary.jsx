@@ -13,7 +13,7 @@ const CheckoutSummary = () => {
 
   return (
     <div>
-      <h3 className="fw-normal text-center">Checkout Summary</h3>
+      <h4 className="fw-normal text-center">Checkout Summary</h4>
       <div>
         {cartItems.length === 0 ? (
           <>
@@ -25,7 +25,7 @@ const CheckoutSummary = () => {
         ) : (
           <div className="mb-2">
             <p>{`Cart item(s): ${cartTotalQuantity}`}</p>
-            <div className="d-flex justify-content-between pb-3">
+            <div className="d-flex justify-content-between pb-4">
               <h4 className="mb-0">Total:</h4>
               <h3 className="text-warning mb-0">{`$${cartTotalAmount.toFixed(
                 2

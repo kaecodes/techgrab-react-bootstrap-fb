@@ -213,7 +213,7 @@ const CheckoutDetails = () => {
               className="mb-2 p-2"
               value={billingAddress.country}
               onChange={(val) =>
-                handleShipping({
+                handleBilling({
                   target: {
                     name: "country",
                     value: val,
