@@ -19,6 +19,7 @@ import {
   ProductDetails,
   Cart,
   Checkout,
+  CheckoutSuccess,
 } from "./pages/index";
 import AdminOnlyRoute from "./components/AdminOnlyRoute";
 import CheckoutDetails from "./pages/checkout/CheckoutDetails";
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout-details" element={<CheckoutDetails />} />
       <Route path="/checkout" element={<Checkout />} />
+      <Route path="/checkout-success" element={<CheckoutSuccess />} />
     </Route>
   )
 );

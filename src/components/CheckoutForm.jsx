@@ -7,6 +7,7 @@ import {
 } from "@stripe/react-stripe-js";
 import CheckoutSummary from "./CheckoutSummary";
 import spinnerImg from "../assets/images/spinner.jpg";
+import { toast } from "react-toastify";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -32,6 +33,7 @@ const CheckoutForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage(null);
 
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
@@ -41,19 +43,31 @@ const CheckoutForm = () => {
 
     setIsLoading(true);
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000",
-      },
-    });
+    const confirmPayment = await stripe
+      .confirmPayment({
+        elements,
+        confirmParams: {
+          // Make sure to change this to your payment completion page
+          return_url: "http://localhost:5173/checkout-success",
+        },
+        redirect_url: "if_required",
+      })
+      .then((result) => {
+        // ok - get paymentIntent
+        // bad - get error
+        if (result.error) {
+          toast.error(result.error.message);
+          setMessage(result.error.message);
+          return;
+        }
+        if (result.paymentIntent) {
+          if (result.paymentIntent.status === "succeeded") {
+            setIsLoading(false);
+            toast.success("Payment Successful!");
+          }
+        }
+      });
 
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
     } else {
