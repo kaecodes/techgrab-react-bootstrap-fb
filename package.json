@@ -2,7 +2,6 @@
   "name": "techgrab-react-bootstrap-fb",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "start:frontend": "vite",
     "start:backend": "nodemon server.js",
