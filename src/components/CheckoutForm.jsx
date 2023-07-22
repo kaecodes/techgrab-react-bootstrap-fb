@@ -7,14 +7,33 @@ import {
 import CheckoutSummary from "./CheckoutSummary";
 import spinnerImg from "../assets/images/spinner.jpg";
 import { toast } from "react-toastify";
+import { selectEmail, selectUserID } from "../redux/features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  CLEAR_CART,
+  selectCartItems,
+  selectCartTotalAmount,
+} from "../redux/features/cartSlice";
+import { selectShippingAddress } from "../redux/features/checkoutSlice";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
+import { db } from "../firebase/config";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-
-  const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Get states from redux store
+  const userID = useSelector(selectUserID);
+  const userEmail = useSelector(selectEmail);
+  const cartItems = useSelector(selectCartItems);
+  const cartTotalAmount = useSelector(selectCartTotalAmount);
+  const shippingAddress = useSelector(selectShippingAddress);
 
   useEffect(() => {
     if (!stripe) {
@@ -30,10 +49,36 @@ const CheckoutForm = () => {
     }
   }, [stripe]);
 
+  // Save order to firebase
   const saveOrder = () => {
-    console.log("Order saved");
+    // Variables for date and time
+    const today = new Date();
+    const date = today.toDateString();
+    const time = today.toLocaleTimeString();
+
+    // Set up config of each order
+    const orderConfig = {
+      userID,
+      userEmail,
+      orderDate: date,
+      orderTime: time,
+      orderAmount: cartTotalAmount,
+      orderStatus: "Order Placed",
+      cartItems,
+      shippingAddress,
+      createdAt: Timestamp.now().toDate(),
+    };
+    try {
+      addDoc(collection(db, "orders"), orderConfig); // Add order to orders collection
+      dispatch(CLEAR_CART()); // Clear cart after order added to firebase
+      toast.success("Order Saved!");
+      navigate("/checkout-success");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
+  // Handle order/checkout form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage(null);
@@ -53,7 +98,7 @@ const CheckoutForm = () => {
           // Make sure to change this to your payment completion page
           return_url: "http://localhost:5173/checkout-success",
         },
-        redirect_url: "if_required",
+        redirect: "if_required",
       })
       .then((result) => {
         // result bad - get error
@@ -67,7 +112,7 @@ const CheckoutForm = () => {
           if (result.paymentIntent.status === "succeeded") {
             setIsLoading(false);
             toast.success("Payment Successful!");
-            saveOrder();
+            saveOrder(); // Save order to firebase
           }
         }
       });
