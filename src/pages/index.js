@@ -11,3 +11,5 @@ export { default as Cart } from "../pages/Cart";
 export { default as CheckoutDetails } from "../pages/checkout/CheckoutDetails";
 export { default as Checkout } from "../pages/checkout/Checkout";
 export { default as CheckoutSuccess } from "../pages/checkout/CheckoutSuccess";
+export { default as OrderHistory } from "../pages/order/OrderHistory";
+export { default as OrderDetails } from "../pages/order/OrderDetails";
