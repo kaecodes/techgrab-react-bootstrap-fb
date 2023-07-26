@@ -44,9 +44,9 @@ const OrderHistory = () => {
             {filteredOrders.length === 0 ? (
               <p>No orders found.</p>
             ) : (
-              <table>
+              <table className="table table-info table-striped">
                 <thead>
-                  <tr>
+                  <tr className="text-center align-middle">
                     <th>Serial No.</th>
                     <th>Date</th>
                     <th>Order ID</th>
@@ -64,7 +64,11 @@ const OrderHistory = () => {
                       orderStatus,
                     } = order;
                     return (
-                      <tr key={id} onClick={() => handleClick(id)}>
+                      <tr
+                        key={id}
+                        onClick={() => handleClick(id)}
+                        className="text-center align-middle"
+                      >
                         <td>{index + 1}</td>
                         <td>
                           {orderDate} at {orderTime}
@@ -75,8 +79,8 @@ const OrderHistory = () => {
                           <p
                             className={
                               orderStatus !== "Delivered"
-                                ? "text-warning"
-                                : "text-success"
+                                ? "text-warning my-auto"
+                                : "text-success my-auto"
                             }
                           >
                             {orderStatus}
