@@ -15,7 +15,7 @@ const useFetchDocument = (collectionName, documentID) => {
     if (docSnap.exists()) {
       // Create an id for the fetched document
       const obj = {
-        id: id,
+        id: documentID,
         ...docSnap.data(),
       };
       setDocument(obj);

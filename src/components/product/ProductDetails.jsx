@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, documentId, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { toast } from "react-toastify";
 import spinnerImg from "../../assets/images/spinner.jpg";
@@ -11,11 +11,13 @@ import {
   DECREASE_CART,
   selectCartItems,
 } from "../../redux/features/cartSlice";
+import useFetchDocument from "../../customHooks/useFetchDocument";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const cartItems = useSelector(selectCartItems);
+  const { document } = useFetchDocument("products", id);
 
   const cart = cartItems.find((cart) => cart.id === id);
 
@@ -26,7 +28,7 @@ const ProductDetails = () => {
 
   const dispatch = useDispatch();
 
-  // // Get a single product from firebase
+  // // Get a single product from firebase -- ** Move to custom hook **
   // const getProduct = async () => {
   //   // Get the reference to the doc
   //   const docRef = doc(db, "products", id);
@@ -46,8 +48,8 @@ const ProductDetails = () => {
   // };
 
   useEffect(() => {
-    getProduct();
-  }, []);
+    setProduct(document);
+  }, [document]);
 
   const addToCart = (product) => {
     dispatch(ADD_TO_CART(product));
