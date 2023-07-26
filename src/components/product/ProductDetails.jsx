@@ -26,24 +26,24 @@ const ProductDetails = () => {
 
   const dispatch = useDispatch();
 
-  // Get a single product from firebase
-  const getProduct = async () => {
-    // Get the reference to the doc
-    const docRef = doc(db, "products", id);
-    // Get the doc based on doc reference
-    const docSnap = await getDoc(docRef);
+  // // Get a single product from firebase
+  // const getProduct = async () => {
+  //   // Get the reference to the doc
+  //   const docRef = doc(db, "products", id);
+  //   // Get the doc based on doc reference
+  //   const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      // Create an id for the fetched document
-      const obj = {
-        id: id,
-        ...docSnap.data(),
-      };
-      setProduct(obj);
-    } else {
-      toast.error("Product Not Found.");
-    }
-  };
+  //   if (docSnap.exists()) {
+  //     // Create an id for the fetched document
+  //     const obj = {
+  //       id: id,
+  //       ...docSnap.data(),
+  //     };
+  //     setProduct(obj);
+  //   } else {
+  //     toast.error("Product Not Found.");
+  //   }
+  // };
 
   useEffect(() => {
     getProduct();
