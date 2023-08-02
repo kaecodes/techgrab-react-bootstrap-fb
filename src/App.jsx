@@ -22,6 +22,7 @@ import {
   CheckoutSuccess,
   OrderHistory,
   OrderDetails,
+  ReviewProduct,
 } from "./pages/index";
 import AdminOnlyRoute from "./components/AdminOnlyRoute";
 import CheckoutDetails from "./pages/checkout/CheckoutDetails";
@@ -51,6 +52,7 @@ const router = createBrowserRouter(
       <Route path="/checkout-success" element={<CheckoutSuccess />} />
       <Route path="/order-history" element={<OrderHistory />} />
       <Route path="/order-details/:id" element={<OrderDetails />} />
+      <Route path="/review-product/:id" element={<ReviewProduct />} />
     </Route>
   )
 );

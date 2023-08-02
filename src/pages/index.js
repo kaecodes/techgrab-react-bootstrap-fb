@@ -13,3 +13,4 @@ export { default as Checkout } from "../pages/checkout/Checkout";
 export { default as CheckoutSuccess } from "../pages/checkout/CheckoutSuccess";
 export { default as OrderHistory } from "../pages/order/OrderHistory";
 export { default as OrderDetails } from "../pages/order/OrderDetails";
+export { default as ReviewProduct } from "../components/ReviewProduct";
