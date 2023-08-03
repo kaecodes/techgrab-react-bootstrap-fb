@@ -12,12 +12,19 @@ import {
   selectCartItems,
 } from "../../redux/features/cartSlice";
 import useFetchDocument from "../../customHooks/useFetchDocument";
+import useFetchCollection from "../../customHooks/useFetchCollection";
+import StarsRating from "react-star-rate";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const cartItems = useSelector(selectCartItems);
   const { document } = useFetchDocument("products", id);
+  // Get data from reviews collection
+  const { data } = useFetchCollection("reviews");
+
+  // Filter reviews to get only reviews that match specific product based on id
+  const filteredReviews = data.filter((review) => review.productID === id);
 
   const cart = cartItems.find((cart) => cart.id === id);
 
@@ -67,7 +74,7 @@ const ProductDetails = () => {
         <h3 className="text-center text-primary pt-3 mb-0 pb-2">
           Product Details
         </h3>
-        <div className="text-center mb-5">
+        <div className="text-center mb-3">
           <Link to="/shop">&larr; Back to Shop</Link>
         </div>
         {product === null ? (
@@ -124,6 +131,32 @@ const ProductDetails = () => {
             </div>
           </div>
         )}
+        <div className="card shadow mt-4 px-5 py-2">
+          <h4 className="text-center text-primary pt-3 mb-0 pb-2">Reviews</h4>
+          <div>
+            {filteredReviews.length === 0 ? (
+              <p className="text-center">
+                There are no reviews for this product yet.
+              </p>
+            ) : (
+              <>
+                <hr />
+                {filteredReviews.map((item, index) => {
+                  const { rate, review, reviewDate, userName } = item;
+                  return (
+                    <div key={index}>
+                      <StarsRating value={rate} />
+                      <p>{review}</p>
+                      <p className="fw-medium">
+                        {reviewDate} | By: {userName}
+                      </p>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );
